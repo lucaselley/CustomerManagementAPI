@@ -1,5 +1,5 @@
 ﻿using Application.Entities;
-using Application.Interfaces;
+using Application.Interfaces.Repositories;
 using Infrastructure.DataContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Repositories {
+namespace Infrastructure.Repositories
+{
     public class DepartmentRepository : IDepartmentRepository {
 
         private readonly ApplicationDbContext _dbContext;

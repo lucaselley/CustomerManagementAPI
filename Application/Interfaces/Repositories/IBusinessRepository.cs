@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces {
-    public interface IBusinessRepository {
+namespace Application.Interfaces.Repositories
+{
+    public interface IBusinessRepository
+    {
         public Task<IEnumerable<BusinessEntity>> GetAll();
         public Task<BusinessEntity> GetById(Guid id);
         public Task<BusinessEntity> GetByName(string name);
