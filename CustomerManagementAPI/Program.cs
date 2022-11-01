@@ -1,4 +1,8 @@
+using Application.Interfaces.Repositories;
+using Application.Interfaces.Services;
+using Application.Services;
 using Infrastructure.DataContext;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +19,12 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>();
 
 //Repositories
+builder.Services.AddScoped<IBusinessRepository, BusinessRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
 //Services
+builder.Services.AddScoped<IBusinessService, BusinessService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 
 
@@ -45,6 +53,11 @@ if (app.Environment.IsDevelopment()) {
     app.UseSwaggerUI();
 }
 
+
+app.UseCors(x => x
+.AllowAnyOrigin()
+.AllowAnyMethod()
+.AllowAnyHeader());
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
