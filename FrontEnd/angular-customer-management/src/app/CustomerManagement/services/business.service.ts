@@ -10,18 +10,31 @@ import { environment } from 'src/environments/environment';
 export class BusinessService {
 
   businesses$ = Observable<Business[]>;
-  // = Observable<Business[]>;
-
+  url = `${environment.api.businessUrl}`;
   constructor(private client: HttpClient) { }
 
-  httpOptions = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
+  httpOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 
   getAll(): Observable<Business[]> {
-    const url = `${environment.api.businessApi}`;
-    console.log(url);
-    return this.client.get<Business[]>(url);
+    console.log(this.url);
+    return this.client.get<Business[]>(this.url);
   }
 
+  getById(id: string): Observable<Business> {
+    return this.client.get<Business>(`${this.url}/${id}`);
+  }
+
+  delete(id: string): Observable<Business> {
+    return this.client.delete(`${this.url}/${id}`);
+  }
+
+  add(business: Business): Observable<Business> {
+    return this.client.post<Business>(this.url, business);
+  }
+
+  update(business: Business, id: string): Observable<Business> {
+    return this.client.put<Business>(`${this.url}/${id}`, business);
+  }
 
 }
