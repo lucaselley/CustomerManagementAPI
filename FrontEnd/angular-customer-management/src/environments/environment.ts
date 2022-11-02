@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   api: {
     baseUrl: "http://localhost:5027/api/",
-    businessApi: "http://localhost:5027/api/business"
+    businessUrl: "http://localhost:5027/api/business",
+    departmentUrl: "http://localhost:5027/api/department"
   }
 };
 
