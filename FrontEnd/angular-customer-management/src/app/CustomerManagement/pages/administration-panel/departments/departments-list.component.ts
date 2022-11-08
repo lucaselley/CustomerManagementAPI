@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Department } from 'src/app/CustomerManagement/models/department.model';
 import { DepartmentService } from 'src/app/CustomerManagement/services/department.service';
 import { CreateDepartmentComponent } from './create-department/create-department.component';
+import { UpdateDepartmentComponent } from './update-department/update-department.component';
 
 @Component({
   selector: 'app-departments-list',
@@ -49,4 +50,14 @@ export class DepartmentsListComponent implements OnInit {
     })
   }
 
+
+  openUpdateDialog(department: Department) {
+    this.dialog.open(UpdateDepartmentComponent, {
+      height: '400px',
+      width: '600px',
+      data: department
+    }).afterClosed().subscribe(res => {
+      this.getAllDepartments();
+    })
+  }
 }

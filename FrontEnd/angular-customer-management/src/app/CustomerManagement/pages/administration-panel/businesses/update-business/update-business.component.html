@@ -1,0 +1,17 @@
+<div class="container">
+
+    <h3>Edit business</h3>
+
+    <form [formGroup]="updateForm" (onSubmit)="submit()">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>CVRnr</mat-label>
+            <input type="number" matInput formControlName="cvRnr">
+        </mat-form-field>
+        <button mat-button type="submit" (click)="submit()">Update</button>
+    </form>
+</div>
