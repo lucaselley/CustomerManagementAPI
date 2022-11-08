@@ -4,6 +4,7 @@ import { Business } from '../../../models/business.model';
 import { BusinessService } from '../../../services/business.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBusinessComponent } from './create-business/create-business.component';
+import { UpdateBusinessComponent } from './update-business/update-business.component';
 
 
 @Component({
@@ -46,6 +47,16 @@ export class BusinessListComponent implements OnInit {
     this.dialog.open(CreateBusinessComponent, {
       height: '400px',
       width: '600px',
+    }).afterClosed().subscribe(res => {
+      this.getAllBusinesses();
+    })
+  }
+
+  openUpdateDialog(business: Business) {
+    this.dialog.open(UpdateBusinessComponent, {
+      height: '400px',
+      width: '600px',
+      data: business
     }).afterClosed().subscribe(res => {
       this.getAllBusinesses();
     })

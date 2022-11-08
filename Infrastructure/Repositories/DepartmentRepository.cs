@@ -83,13 +83,14 @@ namespace Infrastructure.Repositories
 
         public async Task<DepartmentEntity> Update(DepartmentEntity entity) {
 
-            if (entity != null) {
-                _dbContext.Entry(entity).State = EntityState.Modified;
-                return entity;
-            }
+            //if (entity != null) {
+            //    _dbContext.Entry(entity).State = EntityState.Modified;
+            //    return entity;
+            //}
 
-            //TODO: ErrorHandling
-            return null;
+            _dbContext.Departments.Update(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

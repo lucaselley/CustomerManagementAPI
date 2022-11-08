@@ -15,7 +15,7 @@ export class CreateBusinessComponent implements OnInit {
   //TODO: Min/Max length of CVR nr
   createForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    CVRnr: new FormControl<number | null>(null, Validators.required)
+    cvRnr: new FormControl<number | null>(null, Validators.required)
   });
 
   constructor(private businessService: BusinessService,
@@ -29,7 +29,7 @@ export class CreateBusinessComponent implements OnInit {
 
     let business: Business = {
       name: this.createForm.value.name!,
-      CVRnr: this.createForm.value.CVRnr as number
+      cvRnr: this.createForm.value.cvRnr as number
     };
 
     this.businessService.add(business).subscribe(res => {

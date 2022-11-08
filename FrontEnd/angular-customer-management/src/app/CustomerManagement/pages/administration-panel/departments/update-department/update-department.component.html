@@ -1,0 +1,17 @@
+<div class="container">
+
+    <h3>Edit department</h3>
+
+    <form [formGroup]="updateForm" (onSubmit)="submit()">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Department Nr</mat-label>
+            <input type="number" matInput formControlName="departmentNr">
+        </mat-form-field>
+        <button mat-button type="submit" (click)="submit()">Update</button>
+    </form>
+</div>

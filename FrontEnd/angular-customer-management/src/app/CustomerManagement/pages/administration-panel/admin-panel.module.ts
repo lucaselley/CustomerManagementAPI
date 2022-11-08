@@ -6,6 +6,8 @@ import { AdministrationPanelComponent } from './administration-panel.component';
 import { AdminPanelRoutingModule } from './admin-panel-routing.module';
 import { CreateBusinessComponent } from './businesses/create-business/create-business.component';
 import { CreateDepartmentComponent } from './departments/create-department/create-department.component';
+import { UpdateBusinessComponent } from './businesses/update-business/update-business.component';
+import { UpdateDepartmentComponent } from './departments/update-department/update-department.component';
 
 
 
@@ -16,6 +18,8 @@ import { CreateDepartmentComponent } from './departments/create-department/creat
     DepartmentsListComponent,
     CreateBusinessComponent,
     CreateDepartmentComponent,
+    UpdateBusinessComponent,
+    UpdateDepartmentComponent,
 
   ],
   imports: [

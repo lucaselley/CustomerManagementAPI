@@ -58,14 +58,18 @@ namespace CustomerManagementAPI.Controllers {
             return BadRequest();
         }
 
-        //[HttpPut] 
-        //public async Task<ActionResult<BusinessEntity>> Update(BusinessDTO model) {
+        [HttpPut]
+        public async Task<ActionResult<BusinessEntity>> Update(BusinessDTO model, Guid id) {
 
+            var entity = await _service.GetById(id);
 
-        //    if(ModelState.IsValid) 
-        //        await _service.Update(entity);
-        //    return Ok(entity);
-            
-        //}
+            entity.Name = model.Name;
+            entity.CVRnr = model.CVRnr;
+
+            if (ModelState.IsValid)
+                await _service.Update(entity);
+            return Ok(entity);
+
+        }
     }
 }
