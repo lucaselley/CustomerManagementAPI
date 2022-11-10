@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <h1>Hovedopgave</h1>
+        <span class="menu-spacer"></span>
+        <div>
+            <a mat-button [routerLink]="'/'"> Home </a>
+            <a mat-button [routerLink]="'/admin-panel'"> Admin panel </a>
+
+            <button mat-button [matMenuTriggerFor]="menu">Login</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
