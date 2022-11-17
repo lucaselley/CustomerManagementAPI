@@ -11,9 +11,13 @@ export class BusinessService {
 
   businesses$ = Observable<Business[]>;
   url = `${environment.api.businessUrl}`;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }
+
   constructor(private client: HttpClient) { }
 
-  httpOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 
   getAll(): Observable<Business[]> {
@@ -30,11 +34,11 @@ export class BusinessService {
   }
 
   add(business: Business): Observable<Business> {
-    return this.client.post<Business>(this.url, business);
+    return this.client.post<Business>(this.url, business, this.httpOptions);
   }
 
   update(business: Business, id: string): Observable<Business> {
-    return this.client.put<Business>(`${this.url}/${id}`, business);
+    return this.client.put<Business>(`${this.url}/${id}`, business, this.httpOptions);
   }
 
 }
