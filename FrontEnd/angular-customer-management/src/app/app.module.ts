@@ -8,6 +8,7 @@ import { MsalModule } from '@azure/msal-angular/';
 import { MsalRedirectComponent } from '@azure/msal-angular/';
 import { PublicClientApplication } from '@azure/msal-browser/dist/app/PublicClientApplication';
 import { InteractionType } from '@azure/msal-browser/dist/utils/BrowserConstants';
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './CustomerManagement/components/header/header.component';
@@ -34,9 +35,9 @@ import { MaterialModule } from './shared/material.module';
     MsalModule.forRoot(new PublicClientApplication(
       {
         auth: {
-          clientId: "f160c212-a9f1-4f86-ac03-a2d02a825938",
-          redirectUri: "http://localhost:4200/",
-          authority: "https://login.microsoftonline.com/f0cbff30-0d4b-4401-82a8-50291e792b51"
+          clientId: environment.azureAd.clientId,
+          redirectUri: environment.azureAd.redirectUrl,
+          authority: "https://login.microsoftonline.com/" + environment.azureAd.tenantId
         },
         cache: {
           cacheLocation: 'localStorage',

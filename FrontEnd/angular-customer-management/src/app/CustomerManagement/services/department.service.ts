@@ -12,9 +12,14 @@ export class DepartmentService {
   departments$ = Observable<Department[]>;
   url = `${environment.api.departmentUrl}`;
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }
+
   constructor(private client: HttpClient) { }
 
-  httpOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+
 
   getAll(): Observable<Department[]> {
     return this.client.get<Department[]>(this.url);
@@ -29,11 +34,11 @@ export class DepartmentService {
   }
 
   add(department: Department): Observable<Department> {
-    return this.client.post<Department>(this.url, department);
+    return this.client.post<Department>(this.url, department, this.httpOptions);
   }
 
   update(department: Department): Observable<Department> {
-    return this.client.put<Department>(this.url, department);
+    return this.client.put<Department>(this.url, department, this.httpOptions);
   }
 
 }

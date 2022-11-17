@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountInfo } from '@azure/msal-browser';
+import { MsalAuthService } from '../../services/msal-auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isUserLoggedIn?: boolean;
+
+  accountInfo: any;
+
+  constructor(private authService: MsalAuthService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn();
+
+    console.log(this.accountInfo)
   }
 
+  login() {
+    this.authService.login();
+    this.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
+
+
+  }
+
+  isLoggedIn() {
+    this.isUserLoggedIn = this.authService.isLoggedIn();
+    if (this.isUserLoggedIn != false) {
+      this.accountInfo = this.authService.getActiveAccount();
+
+
+    }
+  }
 }
