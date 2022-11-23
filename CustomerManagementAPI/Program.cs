@@ -1,8 +1,12 @@
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Services;
+using CustomerManagementAPI.Middleware;
+using Infrastructure;
 using Infrastructure.DataContext;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
@@ -16,11 +20,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+//Auhentication/Authorization
+builder.Services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
+    .AddAzureADBearer(options => builder.Configuration.Bind("AzureAd", options));
 
-//DependencyInjection
+//Configure CORS
+builder.Services.AddCors(o => o.AddPolicy("default", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
-//DbContext
-builder.Services.AddDbContext<ApplicationDbContext>();
+
+//builder.Services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
+//    .AddAzureADBearer(options => builder.Configuration.Bind("AzureAd", options));
+
+//Add configurations
+builder.Services.AddInfrastructure(builder.Configuration);
 
 //Repositories
 builder.Services.AddScoped<IBusinessRepository, BusinessRepository>();
@@ -44,27 +56,14 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration.GetSection("AzureAd"));
 
 
-//Auhentication/Authorization
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//        .AddMicrosoftIdentityWebApi(
-//        (jwtOptions) => {
-//            // The claim in the Jwt token where App roles are available. (e.g. you setuo in AZURE AD use groups claims instead roles.)
-//            // jwtOptions.TokenValidationParameters.RoleClaimType = "groups";
-//        },
-//        (options) => {
-//            //Configuration is IConfiguration type stored as local property in Startup filled with Ctor injection.
-//            options.ClientId = builder.Configuration["AzureAd:ClientId"];
-//            options.TenantId = builder.Configuration["AzureAd:TenantId"];
-//            options.Domain = builder.Configuration["AzureAd:Domain"];
-//            options.Instance = builder.Configuration["AzureAd:Instance"];
-            
-//        });
 
 
 var app = builder.Build();
 
 
 // Our custom errorhandling middleware
+
+app.UseExtensiveLoggerMiddleware();
 app.UseErrorHandlingMiddleware();
 
 
@@ -75,25 +74,22 @@ if (app.Environment.IsDevelopment()) {
 }
 
 
-app.UseCors(x => x
-.AllowAnyOrigin()
-.AllowAnyMethod()
-.AllowAnyHeader());
+app.UseCors("default");
 app.UseHttpsRedirection();
 
 
 //TODO: Read up on this
+app.UseAuthentication();
 app.UseAuthorization();
-//app.UseAuthentication();
 
-//app.Use(async (context, next) => {
-//    if (!context.User.Identity?.IsAuthenticated ?? false) {
-//        context.Response.StatusCode = 401;
-//        await context.Response.WriteAsync("Not Authenticated");
-//    }
-//    else
-//        await next();
-//});
+app.Use(async (context, next) => {
+    if (!context.User.Identity?.IsAuthenticated ?? false) {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("Not Authenticated");
+    }
+    else
+        await next();
+});
 
 app.MapControllers();
 

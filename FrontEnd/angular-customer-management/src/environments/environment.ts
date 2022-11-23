@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
   api: {
-    baseUrl: "http://localhost:5027/api/",
-    businessUrl: "http://localhost:5027/api/business",
-    departmentUrl: "http://localhost:5027/api/department"
+    baseUrl: "https://localhost:7027/",
+    businessUrl: "https://localhost:7027/api/business",
+    departmentUrl: "https://localhost:7027/api/department"
   },
   azureAd: {
     clientId: "ab9d9fea-982b-4fa4-befa-c496a3462484",
     tenantId: "f0cbff30-0d4b-4401-82a8-50291e792b51",
     redirectUrl: "http://localhost:4200",
-    scopeUri: "https://elleyorg.onmicrosoft.com/3c969a20-c0b4-447e-af2a-c14eb2d085ae/read-access"
+    scopeUri: "https://elleyorg.onmicrosoft.com/3c969a20-c0b4-447e-af2a-c14eb2d085ae/user.read"
   }
 };
 

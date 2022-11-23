@@ -2,6 +2,11 @@
     width: 100%;
 }
 
+
+.header-row {
+    background-color: #186018;
+}
+
 .userInfo {
     float: right;
 }
