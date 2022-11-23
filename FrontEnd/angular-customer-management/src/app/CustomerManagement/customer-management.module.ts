@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerManagementComponent } from 'src/app/CustomerManagement/customer-management.component';
 import { MaterialModule } from '../shared/material.module';
-import { UserLoginComponent } from './components/header/user-login/user-login.component';
+import { UserProfileComponent } from './components/header/user-profile/user-profile.component';
 
 
 
 @NgModule({
   declarations: [
     CustomerManagementComponent,
-    UserLoginComponent,
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,

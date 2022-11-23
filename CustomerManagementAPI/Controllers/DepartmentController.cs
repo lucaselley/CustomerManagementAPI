@@ -1,13 +1,15 @@
 ﻿using Application.Entities;
 using Application.Interfaces.Services;
+using CustomerManagementAPI.Common;
 using CustomerManagementAPI.Mappers.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerManagementAPI.Controllers {
+
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController : ControllerBase {
+    public class DepartmentController : ApiControllerBase {
 
         private readonly IDepartmentService _service;
 
