@@ -13,6 +13,7 @@ namespace Infrastructure {
 
 
         // Add seperate method to add DbContext, to clean up program.cs file
+        // Code for registering in DI registry in seperate class, gets registered when method is called through builder in program.cs
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration) {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")));
             return services;

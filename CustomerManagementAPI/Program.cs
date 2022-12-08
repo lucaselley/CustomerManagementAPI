@@ -1,6 +1,8 @@
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Services;
+using CustomerManagementAPI.Common.Extensions;
+using CustomerManagementAPI.Common.Options;
 using CustomerManagementAPI.Middleware;
 using Infrastructure;
 using Infrastructure.DataContext;
@@ -42,7 +44,9 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IBusinessService, BusinessService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
+// Options
 
+builder.Services.AddAndValidateOptions<GroupOptions>(GroupOptions.Section, builder.Configuration);
 
 
 builder.Services.AddEndpointsApiExplorer();

@@ -27,6 +27,8 @@ export class MsalAuthService {
       res => {
         if (res != null && res.account != null) {
           this.msalService.instance.setActiveAccount(res.account)
+
+
         }
       }
     )
