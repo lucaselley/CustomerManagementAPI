@@ -1,4 +1,4 @@
-﻿using Application.Entities;
+﻿using Domain.Entities;
 using Application.Interfaces.Services;
 using CustomerManagementAPI.Common;
 using CustomerManagementAPI.Mappers.DTO;

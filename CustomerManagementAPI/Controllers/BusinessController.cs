@@ -1,6 +1,7 @@
-﻿using Application.Entities;
+﻿using Domain.Entities;
 using Application.Interfaces.Services;
 using CustomerManagementAPI.Common;
+using CustomerManagementAPI.Common.Attributes;
 using CustomerManagementAPI.Mappers.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace CustomerManagementAPI.Controllers {
         }
 
         [HttpGet]
+        [AdminAuthorize]
         public async Task<ActionResult<IEnumerable<BusinessEntity>>> GetAll() {
 
             var data = await _service.GetAll();
