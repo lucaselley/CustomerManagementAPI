@@ -1,4 +1,4 @@
-﻿using Application.Entities;
+﻿using Domain.Entities;
 using Application.Interfaces.Repositories;
 using Infrastructure.DataContext;
 using Microsoft.EntityFrameworkCore;

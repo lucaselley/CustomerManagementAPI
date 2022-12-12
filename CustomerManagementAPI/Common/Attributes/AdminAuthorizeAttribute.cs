@@ -43,15 +43,20 @@ namespace CustomerManagementAPI.Common.Attributes {
                 context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
                 return;
             }
-          
-            var userGroups = claimsIdentity.Claims.FirstOrDefault(claim => claim.Type == "groups");
-            var isAdminAuthorized = userGroups.Value.Contains(groupOptions.Admin);
 
+            var adminUserGroup = claimsIdentity.Claims.FirstOrDefault(claim => claim.Type == "groups" && claim.Value == groupOptions.Admin);
+            var isAdminAuthorized = adminUserGroup.Value.Contains(groupOptions.Admin);
+
+            if (adminUserGroup != null) {
+                return;
+
+            }
 
             if (!isAdminAuthorized) {
                 context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
                 return;
             }
+
         }
     }
 }

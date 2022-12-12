@@ -1,15 +1,10 @@
-﻿using Application.Entities;
+﻿
 using Application.Interfaces.Repositories;
+using Domain.Entities;
 using Infrastructure.DataContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastructure.Repositories
-{
+namespace Infrastructure.Repositories {
     public class BusinessRepository : IBusinessRepository {
 
         private readonly ApplicationDbContext _dbContext;

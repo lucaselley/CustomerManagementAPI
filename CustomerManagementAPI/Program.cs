@@ -1,6 +1,4 @@
-using Application.Interfaces.Repositories;
-using Application.Interfaces.Services;
-using Application.Services;
+using Domain;
 using CustomerManagementAPI.Common.Extensions;
 using CustomerManagementAPI.Common.Options;
 using CustomerManagementAPI.Middleware;
@@ -14,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using System.Configuration;
 using System.Runtime.CompilerServices;
+using CustomerManagementAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,29 +21,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-//Auhentication/Authorization
-builder.Services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
-    .AddAzureADBearer(options => builder.Configuration.Bind("AzureAd", options));
-
-//Configure CORS
-builder.Services.AddCors(o => o.AddPolicy("default", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
-
-
-//builder.Services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
-//    .AddAzureADBearer(options => builder.Configuration.Bind("AzureAd", options));
-
 //Add configurations
+builder.Services.AddWeb(builder.Configuration);
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-//Repositories
-builder.Services.AddScoped<IBusinessRepository, BusinessRepository>();
-builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-
-//Services
-builder.Services.AddScoped<IBusinessService, BusinessService>();
-builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-
-// Options
+// Options - Comparing groups to defined "accepted" group id's from appsettings
 
 builder.Services.AddAndValidateOptions<GroupOptions>(GroupOptions.Section, builder.Configuration);
 
@@ -52,24 +34,11 @@ builder.Services.AddAndValidateOptions<GroupOptions>(GroupOptions.Section, build
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-//Identity
-
-//var azureAdConfig = builder.Configuration.GetSection("AzureAd");
-
-//builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration.GetSection("AzureAd"));
-
-
-
-
 var app = builder.Build();
 
-
 // Our custom errorhandling middleware
-
 app.UseExtensiveLoggerMiddleware();
 app.UseErrorHandlingMiddleware();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
@@ -77,24 +46,21 @@ if (app.Environment.IsDevelopment()) {
     app.UseSwaggerUI();
 }
 
-
-app.UseCors("default");
 app.UseHttpsRedirection();
 
 
-//TODO: Read up on this
+//app.Use(async (context, next) => {
+//    if (!context.User.Identity?.IsAuthenticated ?? false) {
+//        context.Response.StatusCode = 401;
+//        await context.Response.WriteAsync("Not Authenticated");
+//    }
+//    else
+//        await next();
+//});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.Use(async (context, next) => {
-    if (!context.User.Identity?.IsAuthenticated ?? false) {
-        context.Response.StatusCode = 401;
-        await context.Response.WriteAsync("Not Authenticated");
-    }
-    else
-        await next();
-});
-
-app.MapControllers();
-
+//Custom Configuration
+app.UseWeb();
 app.Run();
