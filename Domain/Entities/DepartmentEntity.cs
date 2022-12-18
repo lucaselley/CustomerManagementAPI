@@ -1,4 +1,5 @@
-﻿using Domain.Entities.EntityBase;
+﻿using Domain.Common.Interface;
+using Domain.Entities.EntityBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class DepartmentEntity : BaseEntity
+    public class DepartmentEntity : EnumBaseEntity, IAuditable
     {
         [Required]
         public int DepartmentNr { get; set; }

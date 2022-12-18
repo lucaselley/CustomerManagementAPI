@@ -8,6 +8,7 @@ namespace Infrastructure.Repositories {
     public class BusinessRepository : IBusinessRepository {
 
         private readonly ApplicationDbContext _dbContext;
+        private readonly CancellationToken cancellationToken = new CancellationToken();
 
         public BusinessRepository(ApplicationDbContext _context) {
             _dbContext = _context;
@@ -19,7 +20,7 @@ namespace Infrastructure.Repositories {
             if (exists) {
                 var entity = await _dbContext.Businesses.FirstOrDefaultAsync(x => x.Id == id);
                 DeleteEntity(entity);
-                await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync(cancellationToken);
                 return entity;
             }
             else {
@@ -55,7 +56,7 @@ namespace Infrastructure.Repositories {
 
         public async Task<BusinessEntity> Update(BusinessEntity entity) {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return entity;
         }
 
@@ -63,7 +64,7 @@ namespace Infrastructure.Repositories {
         public async Task<BusinessEntity> Add(BusinessEntity entity) {
 
             await _dbContext.Businesses.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return entity;
         }
     }

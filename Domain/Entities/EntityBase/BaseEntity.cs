@@ -22,9 +22,5 @@ namespace Domain.Entities.EntityBase
 
         public DateTimeOffset UpdatedDate { get; set; }
 
-
-        public enum CustomerRelation { Unknown, Good, Bad };
-
-        public CustomerRelation _CustomerRelation { get; set; }
     }
 }

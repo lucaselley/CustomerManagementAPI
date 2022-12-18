@@ -1,4 +1,5 @@
 ﻿using AspNetCore.Authentication.ApiKey;
+using CustomerManagementAPI.Common.Options;
 using CustomerManagementAPI.Common.S2S_Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.AzureAD.UI;
@@ -18,11 +19,11 @@ namespace CustomerManagementAPI {
                 .AddAzureADBearer(options => configuration.Bind("AzureAd", options));
 
             //Configure API Key authentication (For S2S calling)
-            //services.AddAuthentication(ApiKeyDefaults.AuthenticationScheme)
-            //    .AddApiKeyInHeader<ApiKeyProvider>(options => {
-            //        options.Realm = ApiKeyProvider.ApiKeyRealm;
-            //        options.KeyName = ApiKeyProvider.ApiKeyHeaderName;
-            //    });
+            services.AddAuthentication(ApiKeyDefaults.AuthenticationScheme)
+                .AddApiKeyInHeader<ApiKeyProvider>(options => {
+                    options.Realm = ApiKeyProvider.ApiKeyRealm;
+                    options.KeyName = ApiKeyProvider.ApiKeyHeaderName;
+                });
 
             //Authorization
             services.AddAuthorization();

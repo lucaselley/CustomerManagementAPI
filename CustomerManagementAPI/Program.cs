@@ -21,10 +21,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+
+//Makes user available in whole project, instead of having to pass it around
+builder.Services.AddHttpContextAccessor();
+
 //Add configurations
 builder.Services.AddWeb(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+
 
 // Options - Comparing groups to defined "accepted" group id's from appsettings
 
@@ -47,16 +53,6 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
-
-
-//app.Use(async (context, next) => {
-//    if (!context.User.Identity?.IsAuthenticated ?? false) {
-//        context.Response.StatusCode = 401;
-//        await context.Response.WriteAsync("Not Authenticated");
-//    }
-//    else
-//        await next();
-//});
 
 app.UseAuthentication();
 app.UseAuthorization();
