@@ -13,6 +13,7 @@ namespace Infrastructure.Repositories
     public class DepartmentRepository : IDepartmentRepository {
 
         private readonly ApplicationDbContext _dbContext;
+        private readonly CancellationToken cancellationToken = new CancellationToken();
 
         public DepartmentRepository(ApplicationDbContext context) {
             _dbContext = context;
@@ -34,7 +35,7 @@ namespace Infrastructure.Repositories
                 //Delete
                 DeleteEntity(entity);
 
-                await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync(cancellationToken);
                 return entity;
             }
             else {
@@ -76,7 +77,7 @@ namespace Infrastructure.Repositories
         public async Task<DepartmentEntity> Add(DepartmentEntity entity) {
 
             await _dbContext.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
             return entity;
         }
@@ -89,7 +90,7 @@ namespace Infrastructure.Repositories
             //}
 
             _dbContext.Departments.Update(entity);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return entity;
         }
     }

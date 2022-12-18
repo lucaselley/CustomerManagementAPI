@@ -44,18 +44,18 @@ namespace CustomerManagementAPI.Common.Attributes {
                 return;
             }
 
-            var adminUserGroup = claimsIdentity.Claims.FirstOrDefault(claim => claim.Type == "groups" && claim.Value == groupOptions.Admin);
-            var isAdminAuthorized = adminUserGroup.Value.Contains(groupOptions.Admin);
+            var hasAdminUserGroup = claimsIdentity.Claims.FirstOrDefault(claim => claim.Type == "groups" && claim.Value == groupOptions.Admin) != null;
 
-            if (adminUserGroup != null) {
+            if (hasAdminUserGroup) {
                 return;
 
             }
 
-            if (!isAdminAuthorized) {
-                context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
-                return;
-            }
+            //Will always default to unauthorized
+            context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
+
+            return;
+
 
         }
     }

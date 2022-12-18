@@ -1,13 +1,14 @@
 ﻿using Domain.Entities;
 using Application.Interfaces.Services;
-using CustomerManagementAPI.Common;
 using CustomerManagementAPI.Common.Attributes;
 using CustomerManagementAPI.Mappers.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using CustomerManagementAPI.Common.CustomControllerBases;
 
-namespace CustomerManagementAPI.Controllers {
+namespace CustomerManagementAPI.Controllers
+{
 
     [Route("api/[controller]")]
     [ApiController]

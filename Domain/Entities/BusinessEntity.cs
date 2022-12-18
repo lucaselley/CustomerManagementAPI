@@ -1,4 +1,5 @@
-﻿using Domain.Entities.EntityBase;
+﻿using Domain.Common.Interface;
+using Domain.Entities.EntityBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities {
-    public class BusinessEntity : BaseEntity {
+    public class BusinessEntity : EnumBaseEntity, IAuditable {
 
         [Required]
         public int CVRnr { get; set; }
