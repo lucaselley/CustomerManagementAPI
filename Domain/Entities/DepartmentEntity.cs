@@ -12,6 +12,6 @@ namespace Domain.Entities
     public class DepartmentEntity : EnumBaseEntity, IAuditable
     {
         [Required]
-        public int DepartmentNr { get; set; }
+        public string DepartmentNr { get; set; } = string.Empty;
     }
 }

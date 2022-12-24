@@ -2,6 +2,10 @@
     public class DepartmentDTO {
 
         public string Name { get; set; } = string.Empty;
-        public int DepartmentNr { get; set; }
+        public string DepartmentNr { get; set; } = string.Empty;
+
+        public int _CustomerRelation { get; set; }
+
+
     }
 }

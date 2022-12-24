@@ -14,6 +14,7 @@ namespace Domain {
         public static IServiceCollection AddApplication(this IServiceCollection services) {
             services.AddScoped<IBusinessService, BusinessService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IAuditService, AuditService>();
 
             return services;
         }

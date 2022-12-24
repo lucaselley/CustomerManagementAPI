@@ -57,12 +57,13 @@ namespace CustomerManagementAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<DepartmentEntity>> Add(DepartmentDTO model) {
+        public async Task<ActionResult<DepartmentEntity>> Add([FromBody]DepartmentDTO model) {
 
             if (model != null) {
                 DepartmentEntity entity = new() {
                     DepartmentNr = model.DepartmentNr,
-                    Name = model.Name
+                    Name = model.Name,
+                    _CustomerRelation = (Domain.Entities.EntityBase.EnumBaseEntity.CustomerRelation)model._CustomerRelation
                 };
 
                 await _service.Add(entity);

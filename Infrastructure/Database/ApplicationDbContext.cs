@@ -66,7 +66,7 @@ namespace Infrastructure.DataContext {
                     _ => true,
                 }).Select(entry => new AuditEntryEntity(
                     entity: entry.Metadata.ClrType.Name,
-                    entityId: Guid.TryParse(entry.Properties.Single(property => property.Metadata.IsPrimaryKey())?.ToString(), out var id) ? id : Guid.Empty,
+                    entityId: Guid.TryParse(entry.Properties.Single(property => property.Metadata.IsPrimaryKey())?.CurrentValue?.ToString(), out var id) ? id : Guid.Empty,
                     action: entry.State == EntityState.Added ? "INSERT" : entry.State == EntityState.Deleted ? "DELETE" : "UPDATE",
                     actor: this._httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(claim => claim.Type.Equals(ClaimTypes.Name, StringComparison.OrdinalIgnoreCase))?.Value ?? "Unknown",
                     changes: entry.Properties.Select(property => new { property.Metadata.Name, property.CurrentValue }).ToDictionary(i => i.Name, i => i.CurrentValue),

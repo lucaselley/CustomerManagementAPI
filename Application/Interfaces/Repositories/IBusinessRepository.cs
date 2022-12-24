@@ -11,7 +11,7 @@ namespace Application.Interfaces.Repositories
     {
         public Task<IEnumerable<BusinessEntity>> GetAll();
         public Task<BusinessEntity> GetById(Guid id);
-        public Task<BusinessEntity> GetByName(string name);
+        public Task<List<BusinessEntity>> GetByCvrNrs(List<string> cvrNrs);
         public Task<BusinessEntity> Delete(Guid id);
         public Task<BusinessEntity> Update(BusinessEntity entity);
         public Task<BusinessEntity> Add(BusinessEntity entity);

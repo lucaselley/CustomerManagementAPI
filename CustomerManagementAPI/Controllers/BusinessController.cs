@@ -44,7 +44,8 @@ namespace CustomerManagementAPI.Controllers
 
             BusinessEntity entity = new() {
                 Name = model.Name,
-                CVRnr = model.CVRnr
+                CVRnr = model.CVRnr,
+                _CustomerRelation = (Domain.Entities.EntityBase.EnumBaseEntity.CustomerRelation)model._CustomerRelation
             };   
             
             await _service.Add(entity);

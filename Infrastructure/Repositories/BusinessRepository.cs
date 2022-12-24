@@ -50,8 +50,11 @@ namespace Infrastructure.Repositories {
             }
         }
 
-        public Task<BusinessEntity> GetByName(string name) {
-            throw new NotImplementedException();
+        //Return business' where business entity's cvr nr is included in the list of cvr nrs in the request
+        public async Task<List<BusinessEntity>> GetByCvrNrs(List<string> cvrNrs) {
+            var result = await _dbContext.Businesses.Where(business => cvrNrs.Contains(business.CVRnr)).ToListAsync();
+
+            return result;
         }
 
         public async Task<BusinessEntity> Update(BusinessEntity entity) {

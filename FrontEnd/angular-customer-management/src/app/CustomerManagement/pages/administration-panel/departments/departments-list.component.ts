@@ -5,6 +5,8 @@ import { Department } from 'src/app/CustomerManagement/models/department.model';
 import { DepartmentService } from 'src/app/CustomerManagement/services/department.service';
 import { CreateDepartmentComponent } from './create-department/create-department.component';
 import { UpdateDepartmentComponent } from './update-department/update-department.component';
+import { ViewDepartmentComponent } from './view-department/view-department.component';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-departments-list',
@@ -15,8 +17,14 @@ export class DepartmentsListComponent implements OnInit {
 
   departments: Department[] = [];
 
+  //create seperate array to filter, so we do not tamper with original mat table data
+  filterDepartmentsArray: Department[] = [];
+
+
+  relationList = [0, 1, 2];
+
   dataSource = new MatTableDataSource<Department>();
-  displayedColumns = ['name', 'departmentNr', 'actions'];
+  displayedColumns = ['name', 'departmentNr', 'customerRelation', 'actions'];
 
   constructor(private departmentService: DepartmentService,
     private dialog: MatDialog) { }
@@ -27,6 +35,7 @@ export class DepartmentsListComponent implements OnInit {
 
   getAllDepartments() {
     this.departmentService.getAll().subscribe(res => {
+      this.filterDepartmentsArray = res;
       this.departments = res;
 
       this.dataSource = new MatTableDataSource(this.departments);
@@ -50,6 +59,16 @@ export class DepartmentsListComponent implements OnInit {
     })
   }
 
+  openViewDialog(department: Department) {
+    this.dialog.open(ViewDepartmentComponent, {
+      height: '500px',
+      width: '700px',
+      data: department
+    }).afterClosed().subscribe(res => {
+      this.getAllDepartments();
+    })
+  }
+
 
   openUpdateDialog(department: Department) {
     this.dialog.open(UpdateDepartmentComponent, {
@@ -59,5 +78,17 @@ export class DepartmentsListComponent implements OnInit {
     }).afterClosed().subscribe(res => {
       this.getAllDepartments();
     })
+  }
+
+  // applyFilterByColumn(event: any) {
+  //   let filteredData = this.dataSource.filter(this.filterDepartmentsArray, (item) => {
+  //     return item.paymentRelation.toLowerCase() == event.value.toLowerCase();
+  //   })
+  // }
+
+  applySearchFilter(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
   }
 }

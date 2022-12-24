@@ -8,6 +8,8 @@ import { CreateBusinessComponent } from './businesses/create-business/create-bus
 import { CreateDepartmentComponent } from './departments/create-department/create-department.component';
 import { UpdateBusinessComponent } from './businesses/update-business/update-business.component';
 import { UpdateDepartmentComponent } from './departments/update-department/update-department.component';
+import { ViewDepartmentComponent } from './departments/view-department/view-department.component';
+import { PaymentRelationEnumConvertPipe } from '../../pipes/payment-relation-enum-convert.pipe';
 
 
 
@@ -20,6 +22,8 @@ import { UpdateDepartmentComponent } from './departments/update-department/updat
     CreateDepartmentComponent,
     UpdateBusinessComponent,
     UpdateDepartmentComponent,
+    ViewDepartmentComponent,
+    PaymentRelationEnumConvertPipe
 
   ],
   imports: [

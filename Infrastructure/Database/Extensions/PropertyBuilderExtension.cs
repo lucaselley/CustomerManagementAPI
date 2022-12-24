@@ -14,6 +14,7 @@ namespace Infrastructure.Database.EntityTypeBuilderExtensions {
 
     public static class PropertyBuilderExtension {
 
+        //Necessary method for AuditEntryEntity.Changes property, since DB doesnt know what to do with the dictionary property. Method converts set from dictionary to Json, and can convert it back to original state as well
         public static PropertyBuilder<T> HasJsonConversion<T>(this PropertyBuilder<T> builder) where T : class, new() {
             ValueConverter<T, string> converter = new
             (

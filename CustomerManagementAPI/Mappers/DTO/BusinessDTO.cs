@@ -2,6 +2,8 @@
     public class BusinessDTO {
 
         public string Name { get; set; } = string.Empty;
-        public int CVRnr { get; set; }
+        public string CVRnr { get; set; } = string.Empty;
+        public int _CustomerRelation { get; set; }
+
     }
 }

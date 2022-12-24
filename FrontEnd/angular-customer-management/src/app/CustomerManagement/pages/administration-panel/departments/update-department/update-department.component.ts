@@ -31,7 +31,7 @@ export class UpdateDepartmentComponent implements OnInit {
 
   submit(): void {
     this.department.name = this.updateForm.value.name!;
-    this.department.departmentNr = this.updateForm.value.departmentNr as number;
+    this.department.departmentNr = this.updateForm.value.departmentNr!;
 
     this.departmentService.update(this.department).subscribe(res => {
       this.dialogRef.close();

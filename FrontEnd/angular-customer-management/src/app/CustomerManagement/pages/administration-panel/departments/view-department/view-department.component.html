@@ -1,0 +1,24 @@
+<div class="view-container" *ngIf="department" style="white-space: pre">
+    <ng-container>
+        <mat-label>Navn: </mat-label>
+        <mat-label>{{department.name}}</mat-label>
+    </ng-container>
+    <br>
+    <ng-container>
+        <mat-label>Afdelingsnummer: </mat-label>
+        <mat-label>{{department.departmentNr}}</mat-label>
+    </ng-container>
+    <br>
+    <ng-container>
+        <mat-label>Betalingsegenskab: </mat-label>
+        <mat-label>{{department._CustomerRelation | paymentRelationEnumConvert}}</mat-label>
+    </ng-container>
+    <br>
+    <ng-container>
+        <mat-label>Oprettelsesdato: </mat-label>
+        <mat-label>{{department.createdDate | date:"dd/MM/YYYY "}}</mat-label>
+    </ng-container>
+    <br>
+
+    <button mat-button (click)="showHistory()">Historik</button>
+</div>
