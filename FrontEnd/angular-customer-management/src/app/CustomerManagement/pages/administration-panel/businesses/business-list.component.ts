@@ -17,7 +17,7 @@ export class BusinessListComponent implements OnInit {
   businesses: Business[] = [];
 
   dataSource = new MatTableDataSource<Business>();
-  displayedColumns = ['name', 'CVRnr', 'actions'];
+  displayedColumns = ['name', 'CVRnr', 'customerRelation', 'actions'];
 
 
   constructor(private businessService: BusinessService,
@@ -60,5 +60,11 @@ export class BusinessListComponent implements OnInit {
     }).afterClosed().subscribe(res => {
       this.getAllBusinesses();
     })
+  }
+
+  applySearchFilter(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
   }
 }

@@ -1,5 +1,8 @@
 export interface Department {
     id?: string;
-    departmentNr?: number;
+    _CustomerRelation?: number;
+    createdDate?: Date;
+    updatedDate?: Date;
+    departmentNr?: string;
     name?: string;
 }

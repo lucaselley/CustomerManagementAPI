@@ -70,7 +70,7 @@ namespace Infrastructure.Repositories
 
 
         //TODO: GetByName
-        public Task<DepartmentEntity> GetByName(string name) {
+        public Task<List<DepartmentEntity>> GetByDepNrs(List<string> depNrs) {
             throw new NotImplementedException();
         }
 

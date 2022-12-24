@@ -28,8 +28,8 @@ namespace Application.Services {
         public async Task<DepartmentEntity> GetById(Guid id)
             => await _repo.GetById(id);
 
-        public async Task<DepartmentEntity> GetByName(string name)
-            => await _repo.GetByName(name);
+        public async Task<List<DepartmentEntity>> GetByDepNrs(List<string> depNrs)
+            => await _repo.GetByDepNrs(depNrs);
 
         public async Task<DepartmentEntity> Update(DepartmentEntity entity)
             => await _repo.Update(entity);

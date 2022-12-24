@@ -12,10 +12,12 @@ import { BusinessListComponent } from '../business-list.component';
 })
 export class CreateBusinessComponent implements OnInit {
 
+  relationList: number[] = [0, 1, 2];
   //TODO: Min/Max length of CVR nr
   createForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    cvRnr: new FormControl<number | null>(null, Validators.required)
+    cvRnr: new FormControl(null, Validators.required),
+    customerRelation: new FormControl(null, Validators.required)
   });
 
   constructor(private businessService: BusinessService,
@@ -29,7 +31,9 @@ export class CreateBusinessComponent implements OnInit {
 
     let business: Business = {
       name: this.createForm.value.name!,
-      cvRnr: this.createForm.value.cvRnr as number
+      cvRnr: this.createForm.value.cvRnr!,
+      _CustomerRelation: this.createForm.value.customerRelation!
+
     };
 
     this.businessService.add(business).subscribe(res => {

@@ -9,13 +9,12 @@
                     <button mat-button [matMenuTriggerFor]="menu">Login</button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item (click)="login();">Login</button>
-                        <button mat-menu-item>Item 2</button>
                     </mat-menu>
                 </ng-container>
                 <ng-container *ngIf="isUserLoggedIn">
                     <button mat-button [matMenuTriggerFor]="user">{{accountInfo?.name}}</button>
                     <mat-menu #user="matMenu">
-                        <a button mat-menu-item [routerLink]="'/admin-panel'">Admin Panel</a>
+                        <a *ngIf="isUserAdmin" button mat-menu-item [routerLink]="'/admin-panel'">Admin Panel</a>
                         <button button mat-menu-item (click)="openUserProfileDialog(accountInfo)">User Profile</button>
                         <button mat-menu-item (click)="logout()">Logout</button>
                     </mat-menu>

@@ -35,7 +35,7 @@ export class UpdateBusinessComponent implements OnInit {
 
 
     this.business.name = this.updateForm.value.name!;
-    this.business.cvRnr = this.updateForm.value.cvRnr as number;
+    this.business.cvRnr = this.updateForm.value.cvRnr!;
 
     this.businessService.update(this.business, this.business.id!).subscribe(res => {
       console.log(this.business)

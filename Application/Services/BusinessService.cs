@@ -27,8 +27,8 @@ namespace Application.Services {
         public async Task<BusinessEntity> GetById(Guid id) 
             => await _repo.GetById(id);
 
-        public async Task<BusinessEntity> GetByName(string name)
-            => await _repo.GetByName(name);
+        public async Task<List<BusinessEntity>> GetByCvrNrs(List<string> cvrNrs)
+            => await _repo.GetByCvrNrs(cvrNrs);
 
         public async Task<BusinessEntity> Update(BusinessEntity entity) 
             => await _repo.Update(entity);

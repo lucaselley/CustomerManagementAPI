@@ -16,7 +16,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>CVRnr</mat-label>
-            <input type="number" matInput formControlName="CVRnr">
+            <input type="text" matInput formControlName="cvRnr">
             <mat-error *ngIf="createForm.hasError('CVRnr') && !createForm.hasError('required')">
                 Please enter a CVRnr
             </mat-error>
@@ -25,6 +25,14 @@
             </mat-error>
         </mat-form-field>
 
+        <mat-form-field appearance="fill">
+            <mat-label>Payment Relation</mat-label>
+            <mat-select formControlName="customerRelation">
+                <mat-option type="number" *ngFor="let item of relationList" [value]="item">
+                    {{item | paymentRelationEnumConvert}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <button mat-button type="submit" (click)="submit()">Add</button>
     </form>

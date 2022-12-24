@@ -11,6 +11,6 @@ namespace Domain.Entities {
     public class BusinessEntity : EnumBaseEntity, IAuditable {
 
         [Required]
-        public int CVRnr { get; set; }
+        public string CVRnr { get; set; } = string.Empty;
     }
 }

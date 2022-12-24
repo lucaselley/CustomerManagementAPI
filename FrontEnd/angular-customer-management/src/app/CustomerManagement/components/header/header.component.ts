@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AccountInfo } from '@azure/msal-browser';
 import { MsalAuthService } from '../../services/msal-auth.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 export class HeaderComponent implements OnInit {
 
   isUserLoggedIn?: boolean;
+  isUserAdmin?: boolean;
+  adminGroup?: any[] = [];
 
   accountInfo = this.authService.getActiveAccount();
 
@@ -20,8 +23,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn();
+    this.isUserAdmin = this.authService.adminCheck();
     console.log(this.accountInfo)
-    console.log(this.accountInfo)
+    console.log((this.accountInfo?.idTokenClaims?.['groups']))
   }
 
   login() {
@@ -39,6 +43,8 @@ export class HeaderComponent implements OnInit {
       this.accountInfo = this.authService.getActiveAccount();
     }
   }
+
+
 
   openUserProfileDialog(accountInfo: any) {
     this.dialog.open(UserProfileComponent, {

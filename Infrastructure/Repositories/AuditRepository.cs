@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Interfaces.Repositories;
+using Domain.Entities;
 using Infrastructure.DataContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories {
-    public class AuditRepository {
+    public class AuditRepository : IAuditRepository {
 
         private readonly ApplicationDbContext _context;
 
@@ -19,7 +20,7 @@ namespace Infrastructure.Repositories {
         // Get all audited entries belongning to specified entity ID. 
         public async Task<List<AuditEntryEntity>> GetByAuditedEntityId(Guid entityId) {
 
-            return await _context.AuditEntries.Where(auditEntity => entityId == auditEntity.Id).ToListAsync();
+            return await _context.AuditEntries.Where(auditEntity => entityId == auditEntity.EntityId).ToListAsync();
 
         }
     }

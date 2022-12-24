@@ -12,11 +12,14 @@ import { DepartmentsListComponent } from '../departments-list.component';
 })
 export class CreateDepartmentComponent implements OnInit {
 
+  relationList: number[] = [0, 1, 2];
+  chosenRelation: number = 0;
+
   createForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    departmentNr: new FormControl<number | null>(null, Validators.required)
+    departmentNr: new FormControl(null, Validators.required),
+    customerRelation: new FormControl(null, Validators.required)
   });
-
   constructor(private departmentService: DepartmentService,
     private dialogRef: MatDialogRef<DepartmentsListComponent>) { }
 
@@ -25,12 +28,12 @@ export class CreateDepartmentComponent implements OnInit {
 
 
   submit(): void {
-
     let department: Department = {
       name: this.createForm.value.name!,
-      departmentNr: this.createForm.value.departmentNr as number
+      departmentNr: this.createForm.value.departmentNr!,
+      _CustomerRelation: this.createForm.value.customerRelation!
     };
-
+    console.log(department._CustomerRelation);
     this.departmentService.add(department).subscribe(res => {
       this.dialogRef.close();
     })

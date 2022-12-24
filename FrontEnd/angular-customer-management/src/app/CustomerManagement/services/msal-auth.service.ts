@@ -1,6 +1,8 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AccountInfo, AuthenticationResult } from '@azure/msal-browser';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,8 @@ export class MsalAuthService {
 
 
   constructor(private msalService: MsalService) { }
+
+  adminGroup: any[] = [];
 
   loginRequest = {
     scopes: ['https://elleyorg.onmicrosoft.com/3c969a20-c0b4-447e-af2a-c14eb2d085ae/read-access']
@@ -34,6 +38,13 @@ export class MsalAuthService {
     )
   }
 
+  adminCheck(): boolean {
+    this.adminGroup = this.msalService.instance.getActiveAccount()?.idTokenClaims?.['groups'] as string[];
+    if (this.adminGroup.includes(environment.AzureAdAdminGroup)) {
+      return true;
+    }
+    return false;
+  }
 
   getActiveAccount() {
     return this.msalService.instance.getActiveAccount();

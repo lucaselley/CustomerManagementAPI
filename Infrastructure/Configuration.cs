@@ -22,7 +22,7 @@ namespace Infrastructure {
             // Add repositories and corresponding interfaces to DI - registry
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-
+            services.AddScoped<IAuditRepository, AuditRepository>();
 
             return services;
         }
