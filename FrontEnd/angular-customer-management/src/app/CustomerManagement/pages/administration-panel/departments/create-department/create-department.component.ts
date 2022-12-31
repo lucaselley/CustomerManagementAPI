@@ -17,7 +17,7 @@ export class CreateDepartmentComponent implements OnInit {
 
   createForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    departmentNr: new FormControl(null, Validators.required),
+    departmentNr: new FormControl('', [Validators.required]),
     customerRelation: new FormControl(null, Validators.required)
   });
   constructor(private departmentService: DepartmentService,

@@ -14,6 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -35,7 +37,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexLayoutModule,
+    MatExpansionModule
 
 
 
@@ -56,7 +60,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexLayoutModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

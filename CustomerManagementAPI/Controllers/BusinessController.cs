@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using CustomerManagementAPI.Common.CustomControllerBases;
 
-namespace CustomerManagementAPI.Controllers
-{
+namespace CustomerManagementAPI.Controllers {
 
     [Route("api/[controller]")]
     [ApiController]
@@ -31,10 +30,10 @@ namespace CustomerManagementAPI.Controllers
 
         [HttpGet("{id}")]
         public async Task<ActionResult<BusinessEntity>> GetById(Guid id) {
-            
+
             var entity = await _service.GetById(id);
 
-            if(entity != null)
+            if (entity != null)
                 return Ok(entity);
             return NotFound();
         }
@@ -46,10 +45,10 @@ namespace CustomerManagementAPI.Controllers
                 Name = model.Name,
                 CVRnr = model.CVRnr,
                 _CustomerRelation = (Domain.Entities.EntityBase.EnumBaseEntity.CustomerRelation)model._CustomerRelation
-            };   
-            
+            };
+
             await _service.Add(entity);
-            
+
             return Ok();
         }
 
@@ -63,17 +62,22 @@ namespace CustomerManagementAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult<BusinessEntity>> Update(BusinessDTO model, Guid id) {
 
-            var entity = await _service.GetById(id);
+            if (model != null) {
+                BusinessEntity entity = await _service.GetById(id);
 
-            entity.Name = model.Name;
-            entity.CVRnr = model.CVRnr;
+                entity.Name = model.Name;
+                entity.CVRnr = model.CVRnr;
+                entity._CustomerRelation = (Domain.Entities.EntityBase.EnumBaseEntity.CustomerRelation)model._CustomerRelation;
 
-            if (ModelState.IsValid)
                 await _service.Update(entity);
-            return Ok(entity);
+                return Ok();
+            }
+            else return BadRequest();
+
+
 
         }
     }

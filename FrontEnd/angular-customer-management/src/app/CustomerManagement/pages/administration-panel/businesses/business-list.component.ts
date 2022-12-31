@@ -5,6 +5,7 @@ import { BusinessService } from '../../../services/business.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBusinessComponent } from './create-business/create-business.component';
 import { UpdateBusinessComponent } from './update-business/update-business.component';
+import { ViewBusinessComponent } from './view-business/view-business.component';
 
 
 @Component({
@@ -38,9 +39,11 @@ export class BusinessListComponent implements OnInit {
   }
 
   delete(id: string) {
-    this.businessService.delete(id).subscribe(res => {
-      this.getAllBusinesses();
-    });
+    if (confirm("Er du sikker på du vil slette denne?")) {
+      this.businessService.delete(id).subscribe(res => {
+        this.getAllBusinesses();
+      });
+    }
   }
 
   openCreateDialog() {
@@ -49,6 +52,14 @@ export class BusinessListComponent implements OnInit {
       width: '600px',
     }).afterClosed().subscribe(res => {
       this.getAllBusinesses();
+    })
+  }
+
+  openViewDialog(business: Business) {
+    this.dialog.open(ViewBusinessComponent, {
+      height: '500px',
+      width: '900px',
+      data: business
     })
   }
 

@@ -6,6 +6,7 @@ import { AuditsService } from 'src/app/CustomerManagement/services/audits.servic
 import { DepartmentService } from 'src/app/CustomerManagement/services/department.service';
 import { DepartmentsListComponent } from '../departments-list.component';
 import { Audit } from 'src/app/CustomerManagement/models/audit.model';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-view-department',
@@ -18,9 +19,12 @@ export class ViewDepartmentComponent implements OnInit {
 
   }
 
-  audit: Audit = {
+  audits: Audit[] = [];
 
-  }
+  dataSource = new MatTableDataSource<Audit>();
+  displayedColumns = ['time', 'action', 'departmentNr', 'customerRelation', 'actor'];
+
+  showHistoryPanelClicked: boolean = false;
 
   viewForm = new FormGroup({
     name: new FormControl(this.data.name, Validators.required),
@@ -38,13 +42,13 @@ export class ViewDepartmentComponent implements OnInit {
 
     this.department = { ... this.data };
 
-    console.log(this.department.id)
   }
 
   showHistory() {
     this.auditService.getAuditByEntityId(this.department.id!).subscribe(res => {
-      this.audit = res;
-      console.log(res)
+      this.audits = res as Audit[];
+
+      this.dataSource = new MatTableDataSource(this.audits);
     });
   }
 

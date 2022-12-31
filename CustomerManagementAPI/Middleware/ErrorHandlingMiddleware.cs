@@ -4,6 +4,7 @@ using System.Net;
 using System.Text.Json;
 using FluentValidation;
 using CustomerManagementAPI.Middleware;
+using Infrastructure.Exceptions;
 
 namespace CustomerManagementAPI.Middleware {
     public class ErrorHandlingMiddleware {
@@ -40,6 +41,8 @@ namespace CustomerManagementAPI.Middleware {
                 await this.next(context);
             } catch (ValidationException e) {
                 await context.Response.WriteAsync(JsonSerializer.Serialize(CreateValidationProblemResponse(e)));
+            } catch (NotFoundException e) {
+                await context.Response.WriteAsync(JsonSerializer.Serialize(CreateProblemResponse((int)HttpStatusCode.NotFound, nameof(NotFoundException), e.Message)));
             } catch (Exception e) {
                 var response = JsonSerializer.Serialize(CreateProblemResponse());
                 logger.LogError(e, "Unexpected exception caught. || {ErrorType}: {ErrorMessage} || Response: {ResponseModel}", e.GetType().Name, e.Message, response);

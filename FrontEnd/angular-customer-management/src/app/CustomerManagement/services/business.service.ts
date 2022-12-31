@@ -37,8 +37,8 @@ export class BusinessService {
     return this.client.post<Business>(this.url, business, this.httpOptions);
   }
 
-  update(business: Business, id: string): Observable<Business> {
-    return this.client.put<Business>(`${this.url}/${id}`, business, this.httpOptions);
+  update(business: Business): Observable<Business> {
+    return this.client.put<Business>(`${this.url}/${business.id}`, business, this.httpOptions);
   }
 
 }

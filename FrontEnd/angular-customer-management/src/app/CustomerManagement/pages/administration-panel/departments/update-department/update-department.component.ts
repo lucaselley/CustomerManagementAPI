@@ -16,9 +16,12 @@ export class UpdateDepartmentComponent implements OnInit {
 
   }
 
+  relationList = [0, 1, 2];
+
   updateForm = new FormGroup({
     name: new FormControl(this.data.name, Validators.required),
-    departmentNr: new FormControl(this.data.departmentNr, Validators.required)
+    departmentNr: new FormControl(this.data.departmentNr, Validators.required),
+    customerRelation: new FormControl(this.data._CustomerRelation, Validators.required)
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: Department,
@@ -32,6 +35,7 @@ export class UpdateDepartmentComponent implements OnInit {
   submit(): void {
     this.department.name = this.updateForm.value.name!;
     this.department.departmentNr = this.updateForm.value.departmentNr!;
+    this.department._CustomerRelation = this.updateForm.value.customerRelation!;
 
     this.departmentService.update(this.department).subscribe(res => {
       this.dialogRef.close();

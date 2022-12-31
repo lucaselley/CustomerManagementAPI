@@ -1,12 +1,14 @@
 <div class="container">
 
     <section class="table">
-        <mat-form-field appearance="fill">
-            <mat-label>Search...</mat-label>
-            <input matInput (keyup)="applySearchFilter($event)" placeholder="Search..." #input>
-        </mat-form-field>
+        <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-form-field appearance="fill">
+                <mat-label>Search...</mat-label>
+                <input matInput (keyup)="applySearchFilter($event)" placeholder="Search..." #input>
+            </mat-form-field>
 
-        <a mat-button (click)="openCreateDialog()">Create</a>
+            <a mat-button (click)="openCreateDialog()">Create</a>
+        </div>
 
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="name">
@@ -29,6 +31,7 @@
                 <td mat-cell *matCellDef="let element">
                     <button button mat-button color="warn" (click)="delete(element.id)">Delete</button>
                     <button button mat-button (click)="openUpdateDialog(element)">Edit</button>
+                    <button button mat-button color="primary" (click)="openViewDialog(element)">View</button>
                 </td>
             </ng-container>
 

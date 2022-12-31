@@ -2,6 +2,7 @@
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.DataContext;
+using Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories {
@@ -24,8 +25,7 @@ namespace Infrastructure.Repositories {
                 return entity;
             }
             else {
-                //TODO: ErrorHandling
-                return null;
+                throw new NotFoundException($"Business entity not found with {id}");
             }
         }
 
@@ -45,8 +45,7 @@ namespace Infrastructure.Repositories {
                 return entity;
             }
             else {
-                //TODO: ErrorHandling
-                return null;
+                throw new NotFoundException($"Business entity not found with {id}");
             }
         }
 
@@ -58,17 +57,28 @@ namespace Infrastructure.Repositories {
         }
 
         public async Task<BusinessEntity> Update(BusinessEntity entity) {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync(cancellationToken);
-            return entity;
+
+            if (entity != null) {
+                UpdateBusiness(entity);
+                await _dbContext.SaveChangesAsync(cancellationToken);
+
+                return entity;
+            }
+            throw new NotFoundException($"Department entity not found");
         }
 
         //TODO: Maybe void, no need to return
         public async Task<BusinessEntity> Add(BusinessEntity entity) {
 
+
             await _dbContext.Businesses.AddAsync(entity);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return entity;
         }
+
+        public void UpdateBusiness(BusinessEntity entity) {
+            _dbContext.Businesses.Update(entity);
+        }
     }
+
 }

@@ -3,15 +3,29 @@
     <h3>Edit department</h3>
 
     <form [formGroup]="updateForm" (onSubmit)="submit()">
-        <mat-form-field appearance="fill">
-            <mat-label>Name</mat-label>
-            <input type="text" matInput formControlName="name">
-        </mat-form-field>
+        <div fxLayout="column">
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput formControlName="name">
+            </mat-form-field>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Department Nr</mat-label>
-            <input type="number" matInput formControlName="departmentNr">
-        </mat-form-field>
-        <button mat-button type="submit" (click)="submit()">Update</button>
+            <mat-form-field appearance="fill">
+                <mat-label>Department Nr</mat-label>
+                <input type="text" matInput formControlName="departmentNr">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Payment Relation</mat-label>
+                <mat-select formControlName="customerRelation">
+                    <mat-option type="number" *ngFor="let item of relationList" [value]="item">
+                        {{item | paymentRelationEnumConvert}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-button type="submit" (click)="submit()">Update</button>
+        </div>
+
+
     </form>
 </div>

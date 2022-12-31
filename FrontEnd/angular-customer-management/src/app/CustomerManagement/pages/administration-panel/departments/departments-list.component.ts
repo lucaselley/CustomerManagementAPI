@@ -45,9 +45,11 @@ export class DepartmentsListComponent implements OnInit {
   }
 
   delete(id: string): void {
-    this.departmentService.delete(id).subscribe(res => {
-      this.getAllDepartments();
-    })
+    if (confirm("Er du sikker på du vil fjerne denne ?")) {
+      this.departmentService.delete(id).subscribe(res => {
+        this.getAllDepartments();
+      })
+    }
   }
 
   openCreateDialog() {
@@ -62,7 +64,7 @@ export class DepartmentsListComponent implements OnInit {
   openViewDialog(department: Department) {
     this.dialog.open(ViewDepartmentComponent, {
       height: '500px',
-      width: '700px',
+      width: '900px',
       data: department
     }).afterClosed().subscribe(res => {
       this.getAllDepartments();
