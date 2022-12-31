@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Business } from 'src/app/CustomerManagement/models/business.model';
 import { BusinessService } from 'src/app/CustomerManagement/services/business.service';
@@ -13,10 +13,11 @@ import { BusinessListComponent } from '../business-list.component';
 export class CreateBusinessComponent implements OnInit {
 
   relationList: number[] = [0, 1, 2];
-  //TODO: Min/Max length of CVR nr
+  cvrPattern = /^[0-9]{8}$/
+
   createForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    cvRnr: new FormControl(null, Validators.required),
+    cvRnr: new FormControl('', [Validators.required, Validators.pattern(this.cvrPattern)]),
     customerRelation: new FormControl(null, Validators.required)
   });
 

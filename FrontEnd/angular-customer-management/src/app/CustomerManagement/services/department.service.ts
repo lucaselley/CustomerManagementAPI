@@ -38,7 +38,7 @@ export class DepartmentService {
   }
 
   update(department: Department): Observable<Department> {
-    return this.client.put<Department>(this.url, department, this.httpOptions);
+    return this.client.put<Department>(`${this.url}/${department.id}`, department, this.httpOptions);
   }
 
 }

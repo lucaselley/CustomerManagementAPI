@@ -3,15 +3,29 @@
     <h3>Edit business</h3>
 
     <form [formGroup]="updateForm" (onSubmit)="submit()">
-        <mat-form-field appearance="fill">
-            <mat-label>Name</mat-label>
-            <input type="text" matInput formControlName="name">
-        </mat-form-field>
 
-        <mat-form-field appearance="fill">
-            <mat-label>CVRnr</mat-label>
-            <input type="number" matInput formControlName="cvRnr">
-        </mat-form-field>
-        <button mat-button type="submit" (click)="submit()">Update</button>
+        <div fxLayout="column">
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>CVRnr</mat-label>
+                <input type="text" matInput formControlName="cvRnr">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Payment Relation</mat-label>
+                <mat-select formControlName="customerRelation">
+                    <mat-option type="number" *ngFor="let item of relationList" [value]="item">
+                        {{item | paymentRelationEnumConvert}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-button type="submit" [disabled]="updateForm.invalid" (click)="submit()">Update</button>
+        </div>
+
     </form>
 </div>

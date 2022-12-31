@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Infrastructure.Exceptions;
 
 namespace Infrastructure.Repositories
 {
@@ -24,11 +26,8 @@ namespace Infrastructure.Repositories
             //Check if id exists in DB
             var exists = await _dbContext.Departments.AnyAsync(x => x.Id == id);
 
-
-
             //If ID exists in DB, do this
             if (exists) {
-
                 //Select entity to be deleted
                 var entity = await _dbContext.Departments.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -39,17 +38,14 @@ namespace Infrastructure.Repositories
                 return entity;
             }
             else {
-
-                //TODO: ErrorHandling
-                return null;
+                throw new NotFoundException($"Department entity not found with {id}");
             }
-
         }
 
-        public void DeleteEntity(DepartmentEntity entity) 
+        public void DeleteEntity(DepartmentEntity entity)
             => _dbContext.Departments.Remove(entity);
 
-        public async Task<IEnumerable<DepartmentEntity>> GetAll() 
+        public async Task<IEnumerable<DepartmentEntity>> GetAll()
             => await _dbContext.Departments.ToListAsync();
 
 
@@ -62,16 +58,16 @@ namespace Infrastructure.Repositories
                 return entity;
             }
             else {
-                //TODO: ErrorHandling
-                return null;
+                throw new NotFoundException($"Department entity not found with {id}");
             }
 
         }
 
 
-        //TODO: GetByName
-        public Task<List<DepartmentEntity>> GetByDepNrs(List<string> depNrs) {
-            throw new NotImplementedException();
+        public async Task<List<DepartmentEntity>> GetByDepNrs(List<string> depNrs) {
+            var result = await _dbContext.Departments.Where(department => depNrs.Contains(department.DepartmentNr)).ToListAsync();
+
+            return result;
         }
 
         public async Task<DepartmentEntity> Add(DepartmentEntity entity) {
@@ -89,9 +85,16 @@ namespace Infrastructure.Repositories
             //    return entity;
             //}
 
+            if (entity != null) {
+                UpdateDepartment(entity);
+                await _dbContext.SaveChangesAsync(cancellationToken);
+                return entity;
+            }
+            throw new NotFoundException($"Department entity not found");
+        }
+
+        public void UpdateDepartment(DepartmentEntity entity) {
             _dbContext.Departments.Update(entity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
-            return entity;
         }
     }
 }

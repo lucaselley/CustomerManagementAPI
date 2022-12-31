@@ -3,37 +3,41 @@
     <h3>Add a department</h3>
 
     <form [formGroup]="createForm" (onSubmit)="submit()">
-        <mat-form-field appearance="fill">
-            <mat-label>Name</mat-label>
-            <input type="text" matInput formControlName="name">
-            <mat-error *ngIf="createForm.hasError('name') && !createForm.hasError('required')">
-                Please enter a name
-            </mat-error>
-            <mat-error *ngIf="createForm.hasError('required')">
-                A name is required
-            </mat-error>
-        </mat-form-field>
+        <div fxLayout="column">
 
-        <mat-form-field appearance="fill">
-            <mat-label>Department</mat-label>
-            <input type="text" matInput formControlName="departmentNr">
-            <mat-error *ngIf="createForm.hasError('CVRnr') && !createForm.hasError('required')">
-                Please enter a department nr
-            </mat-error>
-            <mat-error *ngIf="createForm.hasError('required')">
-                Department nr is required
-            </mat-error>
-        </mat-form-field>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Payment Relation</mat-label>
-            <mat-select formControlName="customerRelation">
-                <mat-option type="number" *ngFor="let item of relationList" [value]="item">
-                    {{item | paymentRelationEnumConvert}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput formControlName="name">
+                <mat-error *ngIf="createForm.hasError('name') && !createForm.hasError('required')">
+                    Please enter a name
+                </mat-error>
+                <mat-error *ngIf="createForm.hasError('required')">
+                    A name is required
+                </mat-error>
+            </mat-form-field>
 
-        <button mat-button type="submit" (click)="submit()">Add</button>
+            <mat-form-field appearance="fill">
+                <mat-label>Department</mat-label>
+                <input type="text" matInput formControlName="departmentNr">
+                <mat-error *ngIf="createForm.hasError('CVRnr') && !createForm.hasError('required')">
+                    Please enter a department nr
+                </mat-error>
+                <mat-error *ngIf="createForm.hasError('required')">
+                    Department nr is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Payment Relation</mat-label>
+                <mat-select formControlName="customerRelation">
+                    <mat-option type="number" *ngFor="let item of relationList" [value]="item">
+                        {{item | paymentRelationEnumConvert}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-button type="submit" [disabled]="createForm.invalid" (click)="submit()">Add</button>
+        </div>
     </form>
 </div>

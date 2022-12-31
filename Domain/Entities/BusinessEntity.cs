@@ -11,6 +11,11 @@ namespace Domain.Entities {
     public class BusinessEntity : EnumBaseEntity, IAuditable {
 
         [Required]
+        [StringLength(8, ErrorMessage = "CVRnr must be 8 characters")]
         public string CVRnr { get; set; } = string.Empty;
+
+        [Required]
+        public string Name { get; set; } = string.Empty;
+
     }
 }

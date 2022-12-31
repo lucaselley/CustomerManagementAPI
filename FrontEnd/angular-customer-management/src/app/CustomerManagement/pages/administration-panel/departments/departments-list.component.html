@@ -1,9 +1,5 @@
 <div class="container">
     <section class="table">
-        <mat-form-field appearance="fill">
-            <mat-label>Search...</mat-label>
-            <input matInput (keyup)="applySearchFilter($event)" placeholder="Search..." #input>
-        </mat-form-field>
         <!-- <mat-form-field appearance="fill">
             <mat-label>Filter by payment relationship...</mat-label>
             <mat-select (selectionChange)="applyFilterByColumn($event) ">
@@ -12,9 +8,15 @@
                 </mat-option>
             </mat-select>
         </mat-form-field> -->
+        <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-form-field appearance="fill">
+                <mat-label>Search...</mat-label>
+                <input matInput (keyup)="applySearchFilter($event)" placeholder="Search..." #input>
+            </mat-form-field>
 
 
-        <a mat-button (click)=" openCreateDialog()">Create</a>
+            <a mat-button (click)=" openCreateDialog()">Create</a>
+        </div>
 
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="name">

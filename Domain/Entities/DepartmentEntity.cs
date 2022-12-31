@@ -13,5 +13,8 @@ namespace Domain.Entities
     {
         [Required]
         public string DepartmentNr { get; set; } = string.Empty;
+
+        [Required]
+        public string Name { get; set; } = string.Empty;
     }
 }

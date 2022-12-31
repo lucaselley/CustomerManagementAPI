@@ -73,18 +73,23 @@ namespace CustomerManagementAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
-        public async Task<ActionResult<DepartmentEntity>> Update(DepartmentDTO model) {
+        [HttpPut("{id}")]
+        public async Task<ActionResult<DepartmentEntity>> Update(DepartmentDTO model, Guid id) {
 
             if (model != null) {
-                DepartmentEntity entity = new() {
-                    Name = model.Name,
-                    DepartmentNr = model.DepartmentNr
-                };
+
+                DepartmentEntity entity = await _service.GetById(id);
+
+                entity.Name = model.Name; 
+                entity.DepartmentNr = model.DepartmentNr;
+                entity._CustomerRelation = (Domain.Entities.EntityBase.EnumBaseEntity.CustomerRelation)model._CustomerRelation;
+
                 await _service.Update(entity);
 
                 return Ok();
+
             } else 
+
                 return BadRequest();
         }
     }
