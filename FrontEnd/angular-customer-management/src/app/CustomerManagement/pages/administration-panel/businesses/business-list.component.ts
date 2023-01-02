@@ -20,6 +20,7 @@ export class BusinessListComponent implements OnInit {
   dataSource = new MatTableDataSource<Business>();
   displayedColumns = ['name', 'CVRnr', 'customerRelation', 'actions'];
 
+  isLoading: boolean = true;
 
   constructor(private businessService: BusinessService,
     private dialog: MatDialog) { }
@@ -29,11 +30,13 @@ export class BusinessListComponent implements OnInit {
   }
 
   getAllBusinesses() {
+    this.isLoading = true;
     this.businessService.getAll().subscribe(res => {
       this.businesses = res;
 
       this.dataSource = new MatTableDataSource(this.businesses);
 
+      this.isLoading = false;
       console.log(this.businesses)
     });
   }

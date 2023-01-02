@@ -1,0 +1,140 @@
+{
+    "title": "",
+    "header": {
+        "home": "Hjem",
+        "business": "Virksomheder",
+        "departments": "Afdelinger",
+        "login": "Log in",
+        "adminPanel": "Admin Panel",
+        "logout": "Log ud",
+        "userProfile": "Vis bruger"
+    },
+    "admin-panel": {
+        "header": "Administreringspanel",
+        "slider": {
+            "business": "Virksomheder",
+            "departments": "Afdelinger"
+        },
+        "business": {
+            "header": "Administrering af virksomheder",
+            "search": {
+                "label": "Søg i virksomheder...",
+                "placeholder": "Søg i virksomheder...",
+                "searchNoResult": "Ingen virksomheder fundet ud fra: "
+            },
+            "actions": {
+                "create": "Tilføj ny"
+            },
+            "table": {
+                "mat-headers": {
+                    "name": "Navn",
+                    "cvrNr": "CVR nr",
+                    "customerRelation": "Betalingsevne"
+                },
+                "buttons": {
+                    "delete": "Slet",
+                    "edit": "Rediger",
+                    "view": "Vis"
+                },
+                "view-table": {
+                    "header": "Samlede informationer om: ",
+                    "labels": {
+                        "name": "Navn",
+                        "cvrNr": "CVR nr",
+                        "customerRelation": "Betalingsevne",
+                        "creationDate": "Oprettelsesdato"
+                    },
+                    "mat-headers": {
+                        "time": "Tidspunkt",
+                        "action": "Handling",
+                        "cvrNr": "CVR nr",
+                        "customerRelation": "Betalingsevne",
+                        "actor": "Ansvarlig bruger"
+                    },
+                    "buttons": {
+                        "back": "Tilbage",
+                        "history": "Historik"
+                    }
+                }
+            }
+        },
+        "departments": {
+            "header": "Administrering af afdelinger",
+            "search": {
+                "label": "Søg i afdelinger...",
+                "placeholder": "Søg i afdelinger...",
+                "searchNoResult": "Ingen afdelinger fundet ud fra: "
+            },
+            "actions": {
+                "create": "Tilføj ny"
+            },
+            "table": {
+                "mat-headers": {
+                    "name": "Navn",
+                    "departmentNr": "Afdelingsnummer",
+                    "customerRelation": "Betalingsevne"
+                },
+                "buttons": {
+                    "delete": "Slet",
+                    "edit": "Rediger",
+                    "view": "Vis"
+                },
+                "view-table": {
+                    "header": "Samlede informationer om ",
+                    "labels": {
+                        "name": "Navn",
+                        "departmentNr": "Afdelingsnummer",
+                        "customerRelation": "Betalingsevne",
+                        "creationDate": "Oprettelsesdato"
+                    },
+                    "mat-headers": {
+                        "time": "Tidspunkt",
+                        "action": "Handling",
+                        "departmentNr": "Afdelingsnummer",
+                        "customerRelation": "Betalingsevne",
+                        "actor": "Ansvarlig bruger"
+                    },
+                    "buttons": {
+                        "back": "Tilbage",
+                        "history": "Historik"
+                    }
+                }
+            }
+        }
+    },
+    "overviews": {
+        "business": {
+            "header": "Overblik over virksomheder",
+            "search": {
+                "label": "Søg i virksomheder...",
+                "placeholder": "Søg i virksomheder...",
+                "searchNoResult": "Ingen virksomheder fundet ud fra: "
+            },
+            "table": {
+                "mat-headers": {
+                    "name": "Navn",
+                    "cvrNr": "CVR nr",
+                    "customerRelation": "Betalingsevne",
+                    "added": "Tilføjet"
+                }
+            }
+        },
+        "departments": {
+            "header": "Overblik over afdelinger",
+            "search": {
+                "label": "Søg i afdelinger...",
+                "placeholder": "Søg i afdelinger...",
+                "searchNoResult": "Ingen afdelinger fundet ud fra: "
+            },
+            "table": {
+                "mat-headers": {
+                    "name": "Navn",
+                    "departmentNr": "Afdelingsnummer",
+                    "customerRelation": "Betalingsevne",
+                    "added": "Tilføjet"
+                }
+            }
+        }
+    },
+    "user-profile": {}
+}

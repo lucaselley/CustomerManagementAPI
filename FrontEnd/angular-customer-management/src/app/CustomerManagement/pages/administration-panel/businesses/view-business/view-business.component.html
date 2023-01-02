@@ -1,10 +1,10 @@
 <div class="view-container" *ngIf="business" style="white-space: pre">
-    <h1>Samlede informationer om "{{business.name}}"</h1>
+    <h1>{{"admin-panel.business.table.view-table.header" | translate}} "{{business.name}}"</h1>
     <section>
         <div class="view-container" fxLayout="row" fxLayoutAlign="space-between center">
             <ng-container>
                 <mat-label>
-                    <h3>Navn: </h3>
+                    <h3>{{"admin-panel.business.table.view-table.labels.name" | translate}}</h3>
                 </mat-label>
                 <mat-label>
                     <h3>{{business.name}}</h3>
@@ -14,7 +14,7 @@
         <div class="view-container" fxLayout="row" fxLayoutAlign="space-between center">
             <ng-container>
                 <mat-label>
-                    <h3>CVR nr: </h3>
+                    <h3>{{"admin-panel.business.table.view-table.labels.cvrNr" | translate}}</h3>
                 </mat-label>
                 <mat-label>
                     <h3>{{business.cvRnr}}</h3>
@@ -24,7 +24,7 @@
         <div class="view-container" fxLayout="row" fxLayoutAlign="space-between center">
             <ng-container>
                 <mat-label>
-                    <h3>Betalingsegenskab:</h3>
+                    <h3>{{"admin-panel.business.table.view-table.labels.customerRelation" | translate}}</h3>
                 </mat-label>
                 <mat-label>
                     <h3>{{business._CustomerRelation | paymentRelationEnumConvert}}</h3>
@@ -34,7 +34,7 @@
         <div class="view-container" fxLayout="row" fxLayoutAlign="space-between center">
             <ng-container>
                 <mat-label>
-                    <h3>Oprettelsesdato: </h3>
+                    <h3>{{"admin-panel.business.table.view-table.labels.creationDate" | translate}}</h3>
                 </mat-label>
                 <mat-label>
                     <h3>{{business.createdDate | date:"dd/MM/YYYY "}}</h3>
@@ -49,7 +49,7 @@
                 (click)="showHistory()">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Historik
+                        {{"admin-panel.business.table.view-table.buttons.history" | translate}}
                     </mat-panel-title>
                     <mat-panel-description>
                         {{showHistoryPanelClicked ? 'Skjul' : 'Vis'}}
@@ -58,35 +58,46 @@
                 <div class="table">
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 view-table">
                         <ng-container matColumnDef="time">
-                            <th mat-header-cell *matHeaderCellDef> Time </th>
+                            <th mat-header-cell *matHeaderCellDef>
+                                {{"admin-panel.business.table.view-table.mat-headers.time" | translate}} </th>
                             <td mat-cell *matCellDef="let element"> {{element?.changes?.UpdatedDate | date:"dd/MM/YYYY
                                 hh:mm"}} </td>
                         </ng-container>
                         <ng-container matColumnDef="action">
-                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <th mat-header-cell *matHeaderCellDef>
+                                {{"admin-panel.business.table.view-table.mat-headers.action" | translate}} </th>
                             <td mat-cell *matCellDef="let element"> {{element?.action | actionTranslation}} </td>
                         </ng-container>
                         <ng-container matColumnDef="cvrNr">
-                            <th mat-header-cell *matHeaderCellDef> CVR Nr </th>
+                            <th mat-header-cell *matHeaderCellDef>
+                                {{"admin-panel.business.table.view-table.mat-headers.cvrNr" | translate}} </th>
                             <td mat-cell *matCellDef="let element"> {{element?.changes?.CVRnr}} </td>
                         </ng-container>
                         <ng-container matColumnDef="customerRelation">
-                            <th mat-header-cell *matHeaderCellDef> Customer Relation </th>
+                            <th mat-header-cell *matHeaderCellDef>
+                                {{"admin-panel.business.table.view-table.mat-headers.customerRelation" | translate}}
+                            </th>
                             <td mat-cell *matCellDef="let element"> {{element?.changes?._CustomerRelation |
                                 paymentRelationEnumConvert}} </td>
                         </ng-container>
                         <ng-container matColumnDef="actor">
-                            <th mat-header-cell *matHeaderCellDef> Actor </th>
+                            <th mat-header-cell *matHeaderCellDef>
+                                {{"admin-panel.business.table.view-table.mat-headers.actor" | translate}} </th>
                             <td mat-cell *matCellDef="let element"> {{element?.actor}} </td>
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
                 </div>
+                <div *ngIf="isLoading"
+                    style="display: flex; justify-content: center; align-items: center; background: white;">
+                    <mat-progress-spinner color="primary" mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
 </div>
 <div class="view-button" fxLayout="row" fxLayoutAlign="end">
-    <button mat-button (click)="close()">Back</button>
+    <button mat-button (click)="close()">{{"admin-panel.business.table.view-table.buttons.back" | translate}}</button>
 </div>

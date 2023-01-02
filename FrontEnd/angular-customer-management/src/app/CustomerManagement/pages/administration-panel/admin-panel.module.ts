@@ -9,8 +9,6 @@ import { CreateDepartmentComponent } from './departments/create-department/creat
 import { UpdateBusinessComponent } from './businesses/update-business/update-business.component';
 import { UpdateDepartmentComponent } from './departments/update-department/update-department.component';
 import { ViewDepartmentComponent } from './departments/view-department/view-department.component';
-import { PaymentRelationEnumConvertPipe } from '../../pipes/payment-relation-enum-convert.pipe';
-import { ActionTranslationPipe } from '../../pipes/action-translation.pipe';
 import { ViewBusinessComponent } from './businesses/view-business/view-business.component';
 
 
@@ -25,8 +23,6 @@ import { ViewBusinessComponent } from './businesses/view-business/view-business.
     UpdateBusinessComponent,
     UpdateDepartmentComponent,
     ViewDepartmentComponent,
-    PaymentRelationEnumConvertPipe,
-    ActionTranslationPipe,
     ViewBusinessComponent
 
   ],

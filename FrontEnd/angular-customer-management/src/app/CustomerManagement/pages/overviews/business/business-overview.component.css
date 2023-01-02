@@ -1,0 +1,23 @@
+:host {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+.container {
+    padding: 10px;
+}
+
+.actions {
+    width: 100%;
+}
+
+#input[type=text] {
+    width: 100%;
+}
+
+/* .mat-column-name {
+    flex: 0 0 80%;
+} */
