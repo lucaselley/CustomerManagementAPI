@@ -24,6 +24,8 @@ export class ViewDepartmentComponent implements OnInit {
   dataSource = new MatTableDataSource<Audit>();
   displayedColumns = ['time', 'action', 'departmentNr', 'customerRelation', 'actor'];
 
+  isLoading: boolean = true;
+
   showHistoryPanelClicked: boolean = false;
 
   viewForm = new FormGroup({
@@ -49,6 +51,8 @@ export class ViewDepartmentComponent implements OnInit {
       this.audits = res as Audit[];
 
       this.dataSource = new MatTableDataSource(this.audits);
+
+      this.isLoading = false;
     });
   }
 

@@ -16,11 +16,17 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PaymentRelationEnumConvertPipe } from '../CustomerManagement/pipes/payment-relation-enum-convert.pipe';
+import { ActionTranslationPipe } from '../CustomerManagement/pipes/action-translation.pipe';
+import { NgxTranslateModule } from './translate/translate.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PaymentRelationEnumConvertPipe,
+    ActionTranslationPipe],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -39,7 +45,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatMenuModule,
     MatSelectModule,
     FlexLayoutModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    NgxTranslateModule
+
 
 
 
@@ -62,7 +71,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatMenuModule,
     MatSelectModule,
     FlexLayoutModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    PaymentRelationEnumConvertPipe,
+    ActionTranslationPipe,
+    NgxTranslateModule
   ]
 })
 export class MaterialModule { }

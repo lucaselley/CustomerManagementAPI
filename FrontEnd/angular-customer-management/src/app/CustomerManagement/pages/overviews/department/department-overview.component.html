@@ -1,0 +1,50 @@
+<div class="container">
+    <h1>{{"overviews.departments.header" | translate}}</h1>
+    <section class="table">
+        <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label><mat-icon>search</mat-icon> {{"overviews.departments.search.label" | translate}}</mat-label>
+                <input matInput (keyup)="applySearchFilter($event)"
+                    placeholder="{{'overviews.departments.search.label' | translate}}" id="input" #input>
+            </mat-form-field>
+
+        </div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> {{"overviews.departments.table.mat-headers.name" | translate}}
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="departmentNr">
+                <th mat-header-cell *matHeaderCellDef> {{"overviews.departments.table.mat-headers.departmentNr" |
+                    translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.departmentNr}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="customerRelation">
+                <th mat-header-cell *matHeaderCellDef> {{"overviews.departments.table.mat-headers.customerRelation" |
+                    translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element._CustomerRelation | paymentRelationEnumConvert}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="added">
+                <th mat-header-cell *matHeaderCellDef> {{"overviews.departments.table.mat-headers.added" | translate}}
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.createdDate | date:"dd/MM/YYYY
+                    hh:mm"}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">{{"overviews.departments.search.searchNoResult" | translate}}
+                    "{{input.value}}"</td>
+            </tr>
+            <div *ngIf="isLoading"
+                style="display: flex; justify-content: center; align-items: center; background: white;">
+                <mat-progress-spinner color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
+        </table>
+    </section>
+</div>

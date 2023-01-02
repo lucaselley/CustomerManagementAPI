@@ -4,9 +4,17 @@
 
 
 .header-row {
-    background-color: #186018;
+    background-color: #005c3c;
 }
 
 .userInfo {
     float: right;
+}
+
+#login-btn {
+    color: white;
+}
+
+#user-btn {
+    color: white;
 }

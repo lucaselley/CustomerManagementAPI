@@ -26,6 +26,9 @@ export class DepartmentsListComponent implements OnInit {
   dataSource = new MatTableDataSource<Department>();
   displayedColumns = ['name', 'departmentNr', 'customerRelation', 'actions'];
 
+  isLoading: boolean = true;
+
+
   constructor(private departmentService: DepartmentService,
     private dialog: MatDialog) { }
 
@@ -39,7 +42,7 @@ export class DepartmentsListComponent implements OnInit {
       this.departments = res;
 
       this.dataSource = new MatTableDataSource(this.departments);
-
+      this.isLoading = false;
       console.log(this.departments)
     })
   }

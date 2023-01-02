@@ -14,12 +14,12 @@ export class AdministrationPanelComponent implements OnInit {
   constructor(private router: Router) {
     this.navLinks = [
       {
-        label: 'Business',
+        label: 'Virksomheder',
         link: './business',
         index: 0
       },
       {
-        label: 'Department',
+        label: 'Afdelinger',
         link: './department',
         index: 1
       }

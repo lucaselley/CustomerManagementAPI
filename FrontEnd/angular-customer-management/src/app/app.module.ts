@@ -19,8 +19,8 @@ import { loginRequest, msalConfig, protectedResources } from './auth-config';
 
 import { HeaderComponent } from './CustomerManagement/components/header/header.component';
 import { CustomerManagementModule } from './CustomerManagement/customer-management.module';
-import { AdminPanelModule } from './CustomerManagement/pages/administration-panel/admin-panel.module';
 import { MaterialModule } from './shared/material.module';
+import { NgxTranslateModule } from './shared/translate/translate.module';
 
 
 export function MSALInstanceFactory(): IPublicClientApplication {
@@ -47,7 +47,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
 
   ],
   imports: [
@@ -57,7 +57,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AdminPanelModule,
     MsalModule
   ],
   providers: [
