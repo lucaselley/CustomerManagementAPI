@@ -20,15 +20,19 @@ namespace CustomerManagementAPI.Controllers {
         }
 
         [HttpGet]
-        [AdminAuthorize]
         public async Task<ActionResult<IEnumerable<BusinessEntity>>> GetAll() {
 
             var data = await _service.GetAll();
 
-            return Ok(data);
+            if (data != null) {
+                return Ok(data);
+            } 
+            else return NotFound();
+
         }
 
         [HttpGet("{id}")]
+        [AdminAuthorize]
         public async Task<ActionResult<BusinessEntity>> GetById(Guid id) {
 
             var entity = await _service.GetById(id);
@@ -39,6 +43,7 @@ namespace CustomerManagementAPI.Controllers {
         }
 
         [HttpPost]
+        [AdminAuthorize]
         public async Task<ActionResult<BusinessEntity>> Add(BusinessDTO model) {
 
             BusinessEntity entity = new() {
@@ -53,6 +58,7 @@ namespace CustomerManagementAPI.Controllers {
         }
 
         [HttpDelete("{id}")]
+        [AdminAuthorize]
         public async Task<ActionResult<BusinessEntity>> Delete(Guid id) {
 
             var result = await _service.Delete(id);
@@ -63,6 +69,7 @@ namespace CustomerManagementAPI.Controllers {
         }
 
         [HttpPut("{id}")]
+        [AdminAuthorize]
         public async Task<ActionResult<BusinessEntity>> Update(BusinessDTO model, Guid id) {
 
             if (model != null) {

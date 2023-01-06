@@ -12,6 +12,7 @@ namespace Infrastructure.Database.EntityConfiguration {
     public class DepartmentEntityConfiguration : IEntityTypeConfiguration<DepartmentEntity> {
         public void Configure(EntityTypeBuilder<DepartmentEntity> builder) {
             builder.UseBaseEntityConfiguration();
+
         }
     }
 }

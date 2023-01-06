@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Business } from 'src/app/CustomerManagement/models/business.model';
 import { BusinessService } from 'src/app/CustomerManagement/services/business.service';
 import { BusinessListComponent } from '../business-list.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-business',
@@ -14,7 +15,8 @@ export class CreateBusinessComponent implements OnInit {
 
   relationList: number[] = [0, 1, 2];
   cvrPattern = /^[0-9]{8}$/
-
+  durationInSeconds = 5;
+  errorMessage: string = '';
   createForm = new FormGroup({
     name: new FormControl('', Validators.required),
     cvRnr: new FormControl('', [Validators.required, Validators.pattern(this.cvrPattern)]),
@@ -22,7 +24,8 @@ export class CreateBusinessComponent implements OnInit {
   });
 
   constructor(private businessService: BusinessService,
-    private dialogRef: MatDialogRef<BusinessListComponent>) { }
+    private dialogRef: MatDialogRef<BusinessListComponent>,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -39,9 +42,12 @@ export class CreateBusinessComponent implements OnInit {
 
     this.businessService.add(business).subscribe(res => {
       this.dialogRef.close();
+    }, error => {
+      this.errorMessage = error?.error?.detail;
+      this.snackBar.open(this.errorMessage, "X", {
+        duration: this.durationInSeconds * 1000
+      });
     })
-
-    console.log(business)
   }
 
 }

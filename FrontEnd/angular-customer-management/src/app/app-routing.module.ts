@@ -4,8 +4,10 @@ import { MsalGuard } from '@azure/msal-angular';
 import { BrowserUtils } from '@azure/msal-browser';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './CustomerManagement/components/header/header.component';
+import { HomeComponent } from './CustomerManagement/pages/home/home.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({

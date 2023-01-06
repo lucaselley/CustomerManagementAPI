@@ -4,6 +4,7 @@ using CustomerManagementAPI.Mappers.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CustomerManagementAPI.Common.CustomControllerBases;
+using CustomerManagementAPI.Common.Attributes;
 
 namespace CustomerManagementAPI.Controllers
 {
@@ -31,6 +32,7 @@ namespace CustomerManagementAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [AdminAuthorize]
         public async Task<ActionResult<DepartmentEntity>> GetById(Guid id) {
 
             var data = await _service.GetById(id);
@@ -44,6 +46,7 @@ namespace CustomerManagementAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [AdminAuthorize]
         public async Task<ActionResult<DepartmentEntity>> Delete(Guid id) {
 
             var data = await _service.Delete(id);
@@ -57,6 +60,7 @@ namespace CustomerManagementAPI.Controllers
         }
 
         [HttpPost]
+        [AdminAuthorize]
         public async Task<ActionResult<DepartmentEntity>> Add([FromBody]DepartmentDTO model) {
 
             if (model != null) {
@@ -74,6 +78,7 @@ namespace CustomerManagementAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [AdminAuthorize]
         public async Task<ActionResult<DepartmentEntity>> Update(DepartmentDTO model, Guid id) {
 
             if (model != null) {

@@ -8,7 +8,8 @@ export const msalConfig: Configuration = {
     auth: {
         clientId: environment.azureAd.clientId,
         authority: "https://login.microsoftonline.com/" + environment.azureAd.tenantId,
-        redirectUri: environment.azureAd.redirectUrl
+        redirectUri: environment.azureAd.redirectUrl,
+        postLogoutRedirectUri: "http://localhost:4200/",
     },
     cache: {
         cacheLocation: BrowserCacheLocation.LocalStorage,

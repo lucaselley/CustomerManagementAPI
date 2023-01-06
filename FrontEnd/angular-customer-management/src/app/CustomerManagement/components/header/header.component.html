@@ -5,10 +5,10 @@
             <a mat-button [routerLink]="'/'">
                 <h4>{{"header.home" | translate}}</h4>
             </a>
-            <a mat-button [routerLink]="'overviews/business'">
+            <a mat-button *ngIf="isUserLoggedIn" [routerLink]="'overviews/business'">
                 <h4>{{"header.business" | translate}}</h4>
             </a>
-            <a mat-button [routerLink]="'overviews/departments'">
+            <a mat-button *ngIf="isUserLoggedIn" [routerLink]="'overviews/departments'">
                 <h4>{{"header.departments" | translate}}</h4>
             </a>
 

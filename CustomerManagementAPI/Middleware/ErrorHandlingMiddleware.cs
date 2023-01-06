@@ -5,6 +5,7 @@ using System.Text.Json;
 using FluentValidation;
 using CustomerManagementAPI.Middleware;
 using Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CustomerManagementAPI.Middleware {
     public class ErrorHandlingMiddleware {
@@ -33,17 +34,23 @@ namespace CustomerManagementAPI.Middleware {
             ProblemDetails CreateValidationProblemResponse(ValidationException validationException) {
                 var problemResponse = CreateProblemResponse((int)HttpStatusCode.BadRequest, nameof(validationException), validationException.Message);
                 problemResponse.Extensions.Add("errors", validationException.Errors);
-                
+
                 return problemResponse;
             }
 
             try {
                 await this.next(context);
-            } catch (ValidationException e) {
+            }
+            catch (ValidationException e) {
                 await context.Response.WriteAsync(JsonSerializer.Serialize(CreateValidationProblemResponse(e)));
-            } catch (NotFoundException e) {
+            } 
+            catch(AlreadyExistsException e) {
+                await context.Response.WriteAsync(JsonSerializer.Serialize(CreateProblemResponse((int)HttpStatusCode.NotFound, nameof(AlreadyExistsException), e.Message)));
+            }
+            catch (NotFoundException e) {
                 await context.Response.WriteAsync(JsonSerializer.Serialize(CreateProblemResponse((int)HttpStatusCode.NotFound, nameof(NotFoundException), e.Message)));
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 var response = JsonSerializer.Serialize(CreateProblemResponse());
                 logger.LogError(e, "Unexpected exception caught. || {ErrorType}: {ErrorMessage} || Response: {ResponseModel}", e.GetType().Name, e.Message, response);
 

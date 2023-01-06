@@ -9,6 +9,10 @@
         "logout": "Log ud",
         "userProfile": "Vis bruger"
     },
+    "home": {
+        "header": "Velkommen",
+        "info": "Kun godkendte brugere igennem Microsoft Azure Active Directory kan bruge dette system."
+    },
     "admin-panel": {
         "header": "Administreringspanel",
         "slider": {

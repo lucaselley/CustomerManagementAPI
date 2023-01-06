@@ -2,6 +2,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AccountInfo, AuthenticationResult } from '@azure/msal-browser';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,9 +11,6 @@ import { environment } from 'src/environments/environment';
 
 
 export class MsalAuthService {
-
-
-
 
   constructor(private msalService: MsalService) { }
 
@@ -24,18 +22,6 @@ export class MsalAuthService {
   //Method to check if a user is logged in
   isLoggedIn(): boolean {
     return this.msalService.instance.getActiveAccount() != null;
-  }
-
-  redirectPromise(): void {
-    this.msalService.instance.handleRedirectPromise().then(
-      res => {
-        if (res != null && res.account != null) {
-          this.msalService.instance.setActiveAccount(res.account)
-
-
-        }
-      }
-    )
   }
 
   adminCheck(): boolean {
@@ -51,15 +37,28 @@ export class MsalAuthService {
   }
 
   // Set the account as the one that was just logged in
-  login() {
-    this.msalService.loginPopup(this.loginRequest).subscribe((res: AuthenticationResult) => {
+  async login(): Promise<boolean> {
+    let login = this.msalService.loginPopup(this.loginRequest)
+    login.subscribe((res: AuthenticationResult) => {
       this.msalService.instance.setActiveAccount(res.account);
+
+
       console.log(res)
     });
+
+    return await login.toPromise().then(x => {
+      console.log("true")
+      return this.isLoggedIn();
+    }).catch(error => {
+      console.log("false")
+      return false;
+    })
   }
 
 
+
+
   logout() {
-    this.msalService.logout();
+    this.msalService.logoutRedirect();
   }
 }
