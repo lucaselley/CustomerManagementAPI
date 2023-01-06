@@ -28,11 +28,11 @@ export class DepartmentOverviewComponent implements OnInit {
 
   getAllDepartments() {
     this.departmentService.getAll().subscribe(res => {
+      this.isLoading = false;
       this.departments = res;
 
       this.dataSource = new MatTableDataSource(this.departments);
-      this.isLoading = false;
-    })
+    });
   }
 
   applySearchFilter(event: any) {

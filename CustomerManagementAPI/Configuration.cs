@@ -37,7 +37,6 @@ namespace CustomerManagementAPI {
             return services;
         }
 
-
         public static WebApplication UseWeb(this WebApplication app) {
             //Use our CORS configuration
             app.UseCors(DefaultCorsPolicy);

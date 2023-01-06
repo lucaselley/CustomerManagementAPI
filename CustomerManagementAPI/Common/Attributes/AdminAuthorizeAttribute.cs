@@ -15,23 +15,16 @@ namespace CustomerManagementAPI.Common.Attributes {
 
             var user = context.HttpContext.User;
 
-
-
             if (user.Identity == null) {
                 context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
-
                 return;
             }
 
             if (!user.Identity.IsAuthenticated) {
                 context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
-
                 return;
             }
 
-
-
-            // you can also use registered services
             var groupOptionsService = context.HttpContext.RequestServices.GetService<IOptions<GroupOptions>>();
             var groupOptions = groupOptionsService.Value;
 
@@ -44,19 +37,16 @@ namespace CustomerManagementAPI.Common.Attributes {
                 return;
             }
 
-            var hasAdminUserGroup = claimsIdentity.Claims.FirstOrDefault(claim => claim.Type == "groups" && claim.Value == groupOptions.Admin) != null;
+            var hasAdminUserGroup = claimsIdentity.Claims
+                .FirstOrDefault(claim => claim.Type == "groups" && claim.Value == groupOptions.Admin) != null;
 
             if (hasAdminUserGroup) {
                 return;
-
             }
 
             //Will always default to unauthorized
             context.Result = new StatusCodeResult((int)System.Net.HttpStatusCode.Forbidden);
-
             return;
-
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Services;
+using CustomerManagementAPI.Common.Attributes;
 using CustomerManagementAPI.Common.CustomControllerBases;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +19,7 @@ namespace CustomerManagementAPI.Controllers {
         }
 
         [HttpGet("{id}")]
+        [AdminAuthorize]
         public async Task<ActionResult<List<AuditEntryEntity>>> GetByAuditedEntityId(Guid id) {
 
             var result = await _service.GetByAuditedEntityId(id);

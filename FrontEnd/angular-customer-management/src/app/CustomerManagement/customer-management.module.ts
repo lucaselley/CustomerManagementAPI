@@ -5,6 +5,7 @@ import { MaterialModule } from '../shared/material.module';
 import { UserProfileComponent } from './components/header/user-profile/user-profile.component';
 import { AdminPanelModule } from './pages/administration-panel/admin-panel.module';
 import { OverviewModule } from './pages/overviews/overview.module';
+import { HomeComponent } from './pages/home/home.component';
 
 
 
@@ -12,6 +13,7 @@ import { OverviewModule } from './pages/overviews/overview.module';
   declarations: [
     CustomerManagementComponent,
     UserProfileComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,

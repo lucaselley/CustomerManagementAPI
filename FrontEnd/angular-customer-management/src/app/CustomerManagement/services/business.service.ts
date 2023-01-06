@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
+import { Observable, catchError } from 'rxjs';
 import { Business } from '../models/business.model';
 import { environment } from 'src/environments/environment';
 
@@ -34,7 +34,12 @@ export class BusinessService {
   }
 
   add(business: Business): Observable<Business> {
-    return this.client.post<Business>(this.url, business, this.httpOptions);
+    return this.client.post<Business>(this.url, business, this.httpOptions)
+    // .pipe(
+    //   catchError((error: HttpErrorResponse) => {
+    //     if (error)
+    //   })
+    // );
   }
 
   update(business: Business): Observable<Business> {

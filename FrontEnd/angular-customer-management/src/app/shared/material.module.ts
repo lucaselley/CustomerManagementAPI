@@ -20,6 +20,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PaymentRelationEnumConvertPipe } from '../CustomerManagement/pipes/payment-relation-enum-convert.pipe';
 import { ActionTranslationPipe } from '../CustomerManagement/pipes/action-translation.pipe';
 import { NgxTranslateModule } from './translate/translate.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 
@@ -47,7 +49,8 @@ import { NgxTranslateModule } from './translate/translate.module';
     FlexLayoutModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-    NgxTranslateModule
+    NgxTranslateModule,
+    MatSnackBarModule
 
 
 
@@ -75,7 +78,8 @@ import { NgxTranslateModule } from './translate/translate.module';
     MatProgressSpinnerModule,
     PaymentRelationEnumConvertPipe,
     ActionTranslationPipe,
-    NgxTranslateModule
+    NgxTranslateModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

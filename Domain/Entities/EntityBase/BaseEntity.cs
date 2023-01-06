@@ -12,7 +12,6 @@ namespace Domain.Entities.EntityBase
     public class BaseEntity {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public Guid Id { get; set; }
 
         public DateTimeOffset CreatedDate { get; set; }

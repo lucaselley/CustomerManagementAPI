@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Infrastructure.Exceptions;
 
-namespace Infrastructure.Repositories
-{
+namespace Infrastructure.Repositories {
     public class DepartmentRepository : IDepartmentRepository {
 
         private readonly ApplicationDbContext _dbContext;
@@ -51,16 +50,13 @@ namespace Infrastructure.Repositories
 
         public async Task<DepartmentEntity> GetById(Guid id) {
 
-            var exists = await _dbContext.Departments.AnyAsync(x => x.Id == id);
 
-            if (exists) {
-                var entity = await _dbContext.Departments.FirstOrDefaultAsync(x => x.Id == id);
-                return entity;
-            }
-            else {
+            var entity = await _dbContext.Departments.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (entity == null) {
                 throw new NotFoundException($"Department entity not found with {id}");
             }
-
+            return entity;
         }
 
 
@@ -71,19 +67,19 @@ namespace Infrastructure.Repositories
         }
 
         public async Task<DepartmentEntity> Add(DepartmentEntity entity) {
+            try {
+                await _dbContext.AddAsync(entity);
+                await _dbContext.SaveChangesAsync(cancellationToken);
 
-            await _dbContext.AddAsync(entity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+                return entity;
+            }
+            catch (DbUpdateException) {
+                throw new AlreadyExistsException($"Department with {entity.DepartmentNr} already exists");
+            }
 
-            return entity;
         }
 
         public async Task<DepartmentEntity> Update(DepartmentEntity entity) {
-
-            //if (entity != null) {
-            //    _dbContext.Entry(entity).State = EntityState.Modified;
-            //    return entity;
-            //}
 
             if (entity != null) {
                 UpdateDepartment(entity);

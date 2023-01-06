@@ -40,11 +40,10 @@
                 <td class="mat-cell" colspan="4">{{"overviews.departments.search.searchNoResult" | translate}}
                     "{{input.value}}"</td>
             </tr>
-            <div *ngIf="isLoading"
-                style="display: flex; justify-content: center; align-items: center; background: white;">
-                <mat-progress-spinner color="primary" mode="indeterminate">
-                </mat-progress-spinner>
-            </div>
         </table>
+        <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
     </section>
 </div>

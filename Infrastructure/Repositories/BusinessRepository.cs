@@ -64,16 +64,20 @@ namespace Infrastructure.Repositories {
 
                 return entity;
             }
-            throw new NotFoundException($"Department entity not found");
+            throw new NotFoundException($"Business entity not found");
         }
 
         //TODO: Maybe void, no need to return
         public async Task<BusinessEntity> Add(BusinessEntity entity) {
 
-
-            await _dbContext.Businesses.AddAsync(entity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
-            return entity;
+            try {
+                await _dbContext.Businesses.AddAsync(entity);
+                await _dbContext.SaveChangesAsync(cancellationToken);
+                return entity;
+            }
+            catch (DbUpdateException){
+                throw new AlreadyExistsException($"Business with {entity.CVRnr} already exists");
+            }
         }
 
         public void UpdateBusiness(BusinessEntity entity) {

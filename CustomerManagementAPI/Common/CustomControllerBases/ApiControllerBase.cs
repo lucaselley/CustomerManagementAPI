@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace CustomerManagementAPI.Common.CustomControllerBases
 {
 
-    //Add "between" controller and controllerbase to make controllers default to "Authorize" attribute. 
-
+    /// <summary>
+    /// Add "between" controller and controllerbase to make controllers default to "Authorize" attribute. 
+    /// </summary>
     [Authorize(AuthenticationSchemes = AzureADDefaults.BearerAuthenticationScheme)]
     [ApiController]
     public class ApiControllerBase : ControllerBase
