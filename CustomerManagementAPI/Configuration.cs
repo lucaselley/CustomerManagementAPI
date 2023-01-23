@@ -15,6 +15,7 @@ namespace CustomerManagementAPI {
             services.AddControllers();
 
             //Authentication with Azure AD - If time, replace with something thats not deprecated
+
             services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
                 .AddAzureADBearer(options => configuration.Bind("AzureAd", options));
 

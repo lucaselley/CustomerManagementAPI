@@ -21,6 +21,7 @@ import { PaymentRelationEnumConvertPipe } from '../CustomerManagement/pipes/paym
 import { ActionTranslationPipe } from '../CustomerManagement/pipes/action-translation.pipe';
 import { NgxTranslateModule } from './translate/translate.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -50,7 +51,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatExpansionModule,
     MatProgressSpinnerModule,
     NgxTranslateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
 
 
 
@@ -79,7 +81,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     PaymentRelationEnumConvertPipe,
     ActionTranslationPipe,
     NgxTranslateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }

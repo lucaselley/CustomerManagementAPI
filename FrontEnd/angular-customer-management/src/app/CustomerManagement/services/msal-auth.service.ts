@@ -38,7 +38,9 @@ export class MsalAuthService {
 
   // Set the account as the one that was just logged in
   async login(): Promise<boolean> {
+
     let login = this.msalService.loginPopup(this.loginRequest)
+    console.log(login)
     login.subscribe((res: AuthenticationResult) => {
       this.msalService.instance.setActiveAccount(res.account);
 

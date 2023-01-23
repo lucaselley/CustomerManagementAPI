@@ -21,13 +21,16 @@
         },
         "business": {
             "header": "Administrering af virksomheder",
+            "createHeader": "Tilføj ny virksomhed",
             "search": {
                 "label": "Søg i virksomheder...",
                 "placeholder": "Søg i virksomheder...",
                 "searchNoResult": "Ingen virksomheder fundet ud fra: "
             },
             "actions": {
-                "create": "Tilføj ny"
+                "create": "Tilføj ny",
+                "add": "Tilføj",
+                "update": "Opdater"
             },
             "table": {
                 "mat-headers": {
@@ -64,13 +67,16 @@
         },
         "departments": {
             "header": "Administrering af afdelinger",
+            "createHeader": "Tilføj ny afdeling",
             "search": {
                 "label": "Søg i afdelinger...",
                 "placeholder": "Søg i afdelinger...",
                 "searchNoResult": "Ingen afdelinger fundet ud fra: "
             },
             "actions": {
-                "create": "Tilføj ny"
+                "create": "Tilføj ny",
+                "add": "Tilføj",
+                "update": "Opdater"
             },
             "table": {
                 "mat-headers": {
@@ -140,5 +146,8 @@
             }
         }
     },
-    "user-profile": {}
+    "user-profile": {},
+    "paginator": {
+        "viewAmount": "Antal pr side: "
+    }
 }
