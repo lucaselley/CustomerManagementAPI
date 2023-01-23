@@ -6,17 +6,17 @@
 
         <div fxLayout="column">
             <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
+                <mat-label>{{"admin-panel.business.table.mat-headers.name" | translate}}</mat-label>
                 <input type="text" matInput formControlName="name">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>CVRnr</mat-label>
+                <mat-label>{{"admin-panel.business.table.mat-headers.cvrNr" | translate}}</mat-label>
                 <input type="text" matInput formControlName="cvRnr">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Payment Relation</mat-label>
+                <mat-label>{{"admin-panel.business.table.mat-headers.customerRelation" | translate}}</mat-label>
                 <mat-select formControlName="customerRelation">
                     <mat-option type="number" *ngFor="let item of relationList" [value]="item">
                         {{item | paymentRelationEnumConvert}}
@@ -24,7 +24,8 @@
                 </mat-select>
             </mat-form-field>
 
-            <button mat-button type="submit" [disabled]="updateForm.invalid" (click)="submit()">Update</button>
+            <button mat-button type="submit" [disabled]="updateForm.invalid"
+                (click)="submit()">{{"admin-panel.business.actions.update" | translate}}</button>
         </div>
 
     </form>

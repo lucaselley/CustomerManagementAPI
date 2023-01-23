@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Department } from 'src/app/CustomerManagement/models/department.model';
 import { DepartmentService } from 'src/app/CustomerManagement/services/department.service';
@@ -15,6 +16,9 @@ export class DepartmentOverviewComponent implements OnInit {
 
   displayedColumns = ['name', 'departmentNr', 'customerRelation', 'added'];
 
+  @ViewChild('paginator') private paginator: any = MatPaginator;
+
+
   isLoading: boolean = true;
 
 
@@ -30,8 +34,9 @@ export class DepartmentOverviewComponent implements OnInit {
     this.departmentService.getAll().subscribe(res => {
       this.isLoading = false;
       this.departments = res;
-
       this.dataSource = new MatTableDataSource(this.departments);
+
+      this.dataSource.paginator = this.paginator;
     });
   }
 

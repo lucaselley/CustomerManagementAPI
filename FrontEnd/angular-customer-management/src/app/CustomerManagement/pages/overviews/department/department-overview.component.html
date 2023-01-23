@@ -41,6 +41,9 @@
                     "{{input.value}}"</td>
             </tr>
         </table>
+        <mat-paginator #paginator [length]="departments.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+        </mat-paginator>
         <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
             <mat-progress-spinner color="primary" mode="indeterminate">
             </mat-progress-spinner>

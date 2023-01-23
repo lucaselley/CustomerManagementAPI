@@ -5,17 +5,17 @@
     <form [formGroup]="updateForm" (onSubmit)="submit()">
         <div fxLayout="column">
             <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
+                <mat-label>{{"admin-panel.departments.table.mat-headers.name" | translate}}</mat-label>
                 <input type="text" matInput formControlName="name">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Department Nr</mat-label>
+                <mat-label>{{"admin-panel.departments.table.mat-headers.departmentNr" | translate}}</mat-label>
                 <input type="text" matInput formControlName="departmentNr">
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Payment Relation</mat-label>
+                <mat-label>{{"admin-panel.departments.table.mat-headers.customerRelation" | translate}}</mat-label>
                 <mat-select formControlName="customerRelation">
                     <mat-option type="number" *ngFor="let item of relationList" [value]="item">
                         {{item | paymentRelationEnumConvert}}
@@ -23,7 +23,8 @@
                 </mat-select>
             </mat-form-field>
 
-            <button mat-button type="submit" (click)="submit()">Update</button>
+            <button mat-button type="submit" (click)="submit()">{{"admin-panel.departments.actions.update" |
+                translate}}</button>
         </div>
 
 

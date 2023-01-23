@@ -10,6 +10,9 @@ import { environment } from 'src/environments/environment';
 export class BusinessService {
 
   businesses$ = Observable<Business[]>;
+
+  business: Business[] = [];
+
   url = `${environment.api.businessUrl}`;
 
   httpOptions = {
@@ -34,12 +37,7 @@ export class BusinessService {
   }
 
   add(business: Business): Observable<Business> {
-    return this.client.post<Business>(this.url, business, this.httpOptions)
-    // .pipe(
-    //   catchError((error: HttpErrorResponse) => {
-    //     if (error)
-    //   })
-    // );
+    return this.client.post<Business>(this.url, business, this.httpOptions);
   }
 
   update(business: Business): Observable<Business> {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Business } from 'src/app/CustomerManagement/models/business.model';
 import { BusinessService } from 'src/app/CustomerManagement/services/business.service';
@@ -13,6 +14,8 @@ export class BusinessOverviewComponent implements OnInit {
   businesses: Business[] = [];
   dataSource = new MatTableDataSource<Business>();
   displayedColumns = ['name', 'CVRnr', 'customerRelation', 'added'];
+
+  @ViewChild('paginator') private paginator: any = MatPaginator;
 
 
   isLoading: boolean = true;
@@ -31,7 +34,7 @@ export class BusinessOverviewComponent implements OnInit {
       this.businesses = res;
 
       this.dataSource = new MatTableDataSource(this.businesses);
-
+      this.dataSource.paginator = this.paginator;
       this.isLoading = false;
     });
   }

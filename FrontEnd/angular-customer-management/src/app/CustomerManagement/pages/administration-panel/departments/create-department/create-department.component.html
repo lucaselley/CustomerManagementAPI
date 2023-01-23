@@ -1,13 +1,13 @@
 <div class="container">
 
-    <h3>Add a department</h3>
+    <h3>{{"admin-panel.departments.createHeader" | translate}}</h3>
 
     <form [formGroup]="createForm" (onSubmit)="submit()">
         <div fxLayout="column">
 
 
             <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
+                <mat-label>{{"admin-panel.departments.table.mat-headers.name" | translate}}</mat-label>
                 <input type="text" matInput formControlName="name">
                 <mat-error *ngIf="createForm.hasError('name') && !createForm.hasError('required')">
                     Please enter a name
@@ -18,7 +18,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Department</mat-label>
+                <mat-label>{{"admin-panel.departments.table.mat-headers.departmentNr" | translate}}</mat-label>
                 <input type="text" matInput formControlName="departmentNr">
                 <mat-error *ngIf="createForm.hasError('CVRnr') && !createForm.hasError('required')">
                     Please enter a department nr
@@ -29,7 +29,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Payment Relation</mat-label>
+                <mat-label>{{"admin-panel.departments.table.mat-headers.customerRelation" | translate}}</mat-label>
                 <mat-select formControlName="customerRelation">
                     <mat-option type="number" *ngFor="let item of relationList" [value]="item">
                         {{item | paymentRelationEnumConvert}}
@@ -37,7 +37,9 @@
                 </mat-select>
             </mat-form-field>
 
-            <button mat-button type="submit" [disabled]="createForm.invalid" (click)="submit()">Add</button>
+            <button mat-button type="submit" [disabled]="createForm.invalid"
+                (click)="submit()">{{"admin-panel.departments.actions.add" | translate}}</button>
+            <button mat-button (click)="addTestData()">Add test data</button>
         </div>
     </form>
 </div>

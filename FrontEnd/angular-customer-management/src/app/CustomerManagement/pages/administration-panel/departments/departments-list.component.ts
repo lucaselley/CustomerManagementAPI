@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Department } from 'src/app/CustomerManagement/models/department.model';
@@ -7,6 +7,7 @@ import { CreateDepartmentComponent } from './create-department/create-department
 import { UpdateDepartmentComponent } from './update-department/update-department.component';
 import { ViewDepartmentComponent } from './view-department/view-department.component';
 import { MatSelectChange } from '@angular/material/select';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-departments-list',
@@ -26,6 +27,9 @@ export class DepartmentsListComponent implements OnInit {
   dataSource = new MatTableDataSource<Department>();
   displayedColumns = ['name', 'departmentNr', 'customerRelation', 'actions'];
 
+  @ViewChild('paginator') private paginator: any = MatPaginator;
+
+
   isLoading: boolean = true;
 
 
@@ -40,10 +44,9 @@ export class DepartmentsListComponent implements OnInit {
     this.departmentService.getAll().subscribe(res => {
       this.filterDepartmentsArray = res;
       this.departments = res;
-
       this.dataSource = new MatTableDataSource(this.departments);
+      this.dataSource.paginator = this.paginator;
       this.isLoading = false;
-      console.log(this.departments)
     })
   }
 
